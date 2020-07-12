@@ -1,0 +1,18 @@
+
+.card-header{
+    background:rgb(118, 118, 198);
+    color: white;
+}
+.header-table{
+    width: 100%;
+}
+.header-title{
+    width: 100%;
+    text-align: left;
+}
+.card-footer{
+    background-color: white;
+}
+.card{
+    background-color: white;
+}
