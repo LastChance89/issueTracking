@@ -1,1 +1,17 @@
-<p>home works!</p>
+<div class = "container"> 
+
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" >
+        <div class = "boundry-header"> 
+          <p>new </p>
+        </div>
+        <app-card class = "card" cdkDrag *ngFor ="let card of cardList;" [(card)] = "card" ></app-card>
+    </div>
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" >
+  
+    </div>
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" >
+      
+    </div>
+  
+  </div>
+  
