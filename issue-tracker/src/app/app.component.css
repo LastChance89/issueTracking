@@ -1,0 +1,23 @@
+.header{
+    background: white;
+    width: 100%;
+    width: 10%;
+  }
+  
+  .subHeader{
+    width: 5%;
+    width: 100%;
+  }
+  .menu{
+    width: 4%;
+    position: relative;
+    overflow: auto;
+    padding-top: 10px;
+    min-width: 56px;
+    float: left;
+    border-right: solid;
+    height: 100%;
+  }
+  .menu a{
+    margin-left: 15px;
+  }

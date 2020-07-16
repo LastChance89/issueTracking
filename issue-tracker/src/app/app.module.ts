@@ -11,6 +11,8 @@ import { IssueComponent } from './issue/issue.component';
 import { EnhancementComponent } from './issue/enhancement/enhancement.component';
 import { DefectComponent } from './issue/defect/defect.component';
 import { FeatureComponent } from './issue/feature/feature.component';
+import { CardService } from './service/cardservice.service';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,13 @@ import { FeatureComponent } from './issue/feature/feature.component';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     DragDropModule 
   ],
   exports:[
     DragDropModule
   ],
-  providers: [],
+  providers: [CardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
