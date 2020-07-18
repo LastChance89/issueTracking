@@ -1,3 +1,10 @@
+.content{
+  background-color:rgba(128, 128, 128, 0.71);
+  height: 95.3%;
+  width: 100%;
+  height: 100%;
+}
+
 .header{
     background: white;
     width: 100%;
@@ -16,8 +23,10 @@
     min-width: 56px;
     float: left;
     border-right: solid;
-    height: 100%;
+    height: 97%;
   }
   .menu a{
     margin-left: 15px;
   }
+
+

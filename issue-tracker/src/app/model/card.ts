@@ -6,7 +6,7 @@ export class Card {
     summary:string;
     idNo: number; 
 
-
+    /*
     constructor(type: string, title: string, priority: number, assignedUser: string, summary: string, idNo: number) {
         this.type = type; 
         this.title = title; 
@@ -15,6 +15,6 @@ export class Card {
         this.summary = summary; 
         this.idNo = idNo;
     }
-
+*/
 }
 

@@ -14,14 +14,15 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  
+  /*
   card1 : Card = new Card("defect","Card 1",1,"Test User 1","Card 1", 1); 
   card2 : Card = new Card("enhancement","Card 2",1,"Test User 2","Card 2", 2); 
   card3 : Card = new Card("enhancement","Card 3",1,"Test User 2","Card 3", 2); 
   cardList = [this.card1, this.card2];
 
   cardList2 = [this.card3];
-
+*/
+cardList =[]
 
   drop(event: CdkDragDrop<string[]>) {
     if(event.previousContainer === event.container){

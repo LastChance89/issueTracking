@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardComponent } from './card/card.component';
@@ -12,7 +11,10 @@ import { EnhancementComponent } from './issue/enhancement/enhancement.component'
 import { DefectComponent } from './issue/defect/defect.component';
 import { FeatureComponent } from './issue/feature/feature.component';
 import { CardService } from './service/cardservice.service';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
+import { IssueModalComponent } from './modal/issue-modal/issue-modal.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -22,18 +24,22 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
     IssueComponent,
     EnhancementComponent,
     DefectComponent,
-    FeatureComponent
+    FeatureComponent,
+    IssueModalComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    DragDropModule 
+    DragDropModule,
+    NgbModule,
+    FormsModule
   ],
   exports:[
     DragDropModule
   ],
+  entryComponents:[IssueModalComponent],
   providers: [CardService],
   bootstrap: [AppComponent]
 })
