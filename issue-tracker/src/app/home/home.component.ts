@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Card } from '../model/card';
+import { CardService } from '../service/cardservice.service';
 
 @Component({
   selector: 'app-home',
@@ -9,9 +10,34 @@ import { Card } from '../model/card';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private cardService: CardService) { }
+
+  enhancements: Card[] = [];
+  defects: Card[] = [];
 
   ngOnInit() {
+    let cards: Card[] = [];
+    this.cardService.getAllCards().subscribe(result => {
+      console.log(result);
+      
+      result.forEach(element => {
+        if (element.type === "New Functionality") {
+          this.enhancements.push(element);
+        }
+        if (element.type === "Defect") {
+          this.defects.push(element);
+        }
+      });
+    },
+      //Make me error modal wiht better errors. 
+    error => {
+      console.log("error")
+    }
+
+    );
+
+
+
   }
 
   /*
@@ -22,16 +48,16 @@ export class HomeComponent implements OnInit {
 
   cardList2 = [this.card3];
 */
-cardList =[]
+  cardList = []
 
   drop(event: CdkDragDrop<string[]>) {
-    if(event.previousContainer === event.container){
+    if (event.previousContainer === event.container) {
       moveItemInArray(this.cardList, event.previousIndex, event.currentIndex);
     }
-    else{
-      transferArrayItem(event.previousContainer.data,event.container.data, 
+    else {
+      transferArrayItem(event.previousContainer.data, event.container.data,
         event.previousIndex, event.currentIndex);
     }
-    
+
   }
 }

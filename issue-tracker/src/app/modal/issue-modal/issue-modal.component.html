@@ -1,0 +1,79 @@
+<div class="modal-header">
+    <div>
+        Test1 modal.
+    </div>
+</div>
+
+<div class="modal-body">
+    <div> 
+        <h4>
+        Request Type
+        </h4>
+    </div>
+    <div>
+        <select [(ngModel)] ="card.type" >
+            <option  [selected]="isSelected">
+                New Functionality
+            </option>
+            <option>
+                Enhancement
+            </option>
+            <option>
+                Defect
+            </option>
+            <option>
+                Generic Request
+            </option>
+        </select>
+    </div>
+    <h4>
+        Request Title
+    </h4>
+    <div>
+        <input [(ngModel)]="card.title" id="text" placeholder="title" type="text">
+    </div>
+    <h4>
+        Request Priority
+    </h4> 
+    <div>
+        <select [(ngModel)]="card.priority">
+            <option value = 1>
+                Very Low
+            </option>
+            <option value = 2>
+                Low
+            </option>
+            <option value = 3>
+                Medium
+            </option>
+            <option value = 4>
+                High
+            </option>
+            <option value = 5>
+                Very High
+            </option>
+        </select>
+    </div>
+    <h4> 
+        Assigned User
+    </h4>
+    <div>
+        <!--Need to setup users in database for now no users-->
+        <select [(ngModel)]="card.assignedUser"> 
+            <option> 
+                Not Assigned
+            </option>
+        </select> 
+    </div>
+    <h4>
+        Request Sumamry
+    </h4> 
+    <div> 
+        <textarea class = "summary-text-input" [(ngModel)] = "card.summary"> </textarea>
+    </div>
+</div>
+
+<div class="modal-footer">
+    <button (click)="create($event)">Create</button>
+    <button (click)="close($event)">Close</button>
+</div>

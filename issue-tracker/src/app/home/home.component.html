@@ -1,17 +1,17 @@
 <div class = "container" cdkDropListGroup> 
 
-    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData] ="cardList"  >
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData] ="enhancements"  >
         <div class = "boundry-header"> 
-          <p>new </p>
+          <p>new</p>
         </div>
-        <app-card class = "card"  *ngFor ="let card of cardList;" [(card)] = "card" cdkDrag></app-card>
+        <app-card class = "card"  *ngFor ="let card of enhancements;" [(card)] = "card" cdkDrag></app-card>
     </div>
 
-    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="cardList2" >
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="defects" >
       <div class = "boundry-header"> 
-        <p>test </p>
+        <p>defect</p>
       </div>
-      <app-card class = "card" *ngFor ="let card of cardList2;" [(card)] = "card" cdkDrag></app-card> 
+      <app-card class = "card" *ngFor ="let card of defects;" [(card)] = "card" cdkDrag></app-card> 
   
     </div>
 

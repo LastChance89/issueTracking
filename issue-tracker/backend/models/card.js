@@ -9,4 +9,4 @@ let Card = mongoose.Schema({
     summary:String,
     idNo: Number
 }, {collection: 'Issues'});
-module.exports = Card;
+module.exports = mongoose.model('Card',Card);
