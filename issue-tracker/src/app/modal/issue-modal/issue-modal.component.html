@@ -12,17 +12,8 @@
     </div>
     <div>
         <select [(ngModel)] ="card.type" >
-            <option  [selected]="isSelected">
-                New Functionality
-            </option>
-            <option>
-                Enhancement
-            </option>
-            <option>
-                Defect
-            </option>
-            <option>
-                Generic Request
+            <option *ngFor = "let type of cardTypes">
+                {{type}}
             </option>
         </select>
     </div>
@@ -32,25 +23,22 @@
     <div>
         <input [(ngModel)]="card.title" id="text" placeholder="title" type="text">
     </div>
+
+    <h4> 
+        Request Status
+    </h4>
+    <div>
+        <select [(ngModel)] = "card.status">
+            <option *ngFor = "let status of statusTypes">{{status}}</option>
+        </select>
+    </div> 
     <h4>
         Request Priority
     </h4> 
     <div>
         <select [(ngModel)]="card.priority">
-            <option value = 1>
-                Very Low
-            </option>
-            <option value = 2>
-                Low
-            </option>
-            <option value = 3>
-                Medium
-            </option>
-            <option value = 4>
-                High
-            </option>
-            <option value = 5>
-                Very High
+            <option *ngFor = "let priority of priorities" [ngValue] =priorities.indexOf(priority)> 
+                {{priority}}
             </option>
         </select>
     </div>

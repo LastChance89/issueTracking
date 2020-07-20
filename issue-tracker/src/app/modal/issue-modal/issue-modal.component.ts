@@ -14,20 +14,23 @@ export class IssueModalComponent implements OnInit {
 
   card :Card = new Card();
   
-  
+  cardTypes: String[] = ["New Functionality","Enhancement","Defect","Generic Request"]
+  priorities: String[] = ["Very Low", "Low", "Medium","High","Very High"];
+  statusTypes: String[] = ["New", "In Progress","Testing","Approval","Completed"];
+
   ngOnInit() {
     //Set defualt options if the card is new.
     if(this.card.type == undefined){
       this.card.type = "New Functionality"
-      this.card.priority = 1;
+      this.card.priority = 0;
       this.card.assignedUser = "Not Assigned"
+      this.card.status = "New"
     }
   }
   create(e){
      e.preventDefault();
      console.log(this.card);
      this.cardService.newCard(this.card).subscribe(result =>{
-      console.log("FIRE!")
     });
     
   }

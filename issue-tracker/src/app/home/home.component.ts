@@ -12,42 +12,51 @@ export class HomeComponent implements OnInit {
 
   constructor(private cardService: CardService) { }
 
-  enhancements: Card[] = [];
-  defects: Card[] = [];
+  new: Card[] = [];
+  inProgress: Card[] = [];
+  testing: Card[] = [];
+  approval: Card[] = [];
+  completed: Card[] = [];
+
+
+ 
 
   ngOnInit() {
     let cards: Card[] = [];
     this.cardService.getAllCards().subscribe(result => {
       console.log(result);
-      
       result.forEach(element => {
-        if (element.type === "New Functionality") {
-          this.enhancements.push(element);
+        switch(element.priority){    
+          case 1:
+            this.inProgress.push(element);
+            break;
+          case 2:
+            this.testing.push(element);
+            break;
+          case 3:
+            this.approval.push(element);
+            break;
+          case 4:
+            this.completed.push(element);
+            break;
+          default: 
+            this.new.push(element);
+            break;
         }
-        if (element.type === "Defect") {
-          this.defects.push(element);
+        if (element.status === "New Functionality") {
+          this.new.push(element);
+        }
+        if (element.status === "Defect") {
+          this.inProgress.push(element);
         }
       });
     },
-      //Make me error modal wiht better errors. 
+      //Make me error modal with better errors. 
     error => {
       console.log("error")
     }
-
     );
-
-
-
   }
-
-  /*
-  card1 : Card = new Card("defect","Card 1",1,"Test User 1","Card 1", 1); 
-  card2 : Card = new Card("enhancement","Card 2",1,"Test User 2","Card 2", 2); 
-  card3 : Card = new Card("enhancement","Card 3",1,"Test User 2","Card 3", 2); 
-  cardList = [this.card1, this.card2];
-
-  cardList2 = [this.card3];
-*/
   cardList = []
 
   drop(event: CdkDragDrop<string[]>) {

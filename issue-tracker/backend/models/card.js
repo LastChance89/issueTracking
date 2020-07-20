@@ -2,8 +2,9 @@ const mongoose = require('mongoose')
 const schema = mongoose.scheme;
 
 let Card = mongoose.Schema({
-    type: String,
     title: String, 
+    type: String,
+    status: String,
     priority: Number, 
     assignedUser: String, 
     summary:String,

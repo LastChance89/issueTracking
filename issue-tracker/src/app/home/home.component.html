@@ -1,25 +1,45 @@
 <div class = "container" cdkDropListGroup> 
 
-    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData] ="enhancements"  >
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData] ="new"  >
         <div class = "boundry-header"> 
-          <p>new</p>
+          <p>New</p>
         </div>
-        <app-card class = "card"  *ngFor ="let card of enhancements;" [(card)] = "card" cdkDrag></app-card>
+        <app-card class = "card"  *ngFor ="let card of new;" [(card)] = "card" cdkDrag></app-card>
     </div>
 
-    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="defects" >
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="inProgress" >
       <div class = "boundry-header"> 
-        <p>defect</p>
+        <p>In Progress</p>
       </div>
-      <app-card class = "card" *ngFor ="let card of defects;" [(card)] = "card" cdkDrag></app-card> 
+      <app-card class = "card" *ngFor ="let card of inProgress;" [(card)] = "card" cdkDrag></app-card> 
+  
+    </div>
+
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="testing" >
+      <div class = "boundry-header"> 
+        <p>Testing</p>
+      </div>
+      <app-card class = "card" *ngFor ="let card of testing;" [(card)] = "card" cdkDrag></app-card> 
+  
+    </div>
+
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="approval" >
+      <div class = "boundry-header"> 
+        <p>Approval</p>
+      </div>
+      <app-card class = "card" *ngFor ="let card of approval;" [(card)] = "card" cdkDrag></app-card> 
+  
+    </div>
+
+    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)"  [cdkDropListData] ="completed" >
+      <div class = "boundry-header"> 
+        <p>Completed</p>
+      </div>
+      <app-card class = "card" *ngFor ="let card of completed;" [(card)] = "card" cdkDrag></app-card> 
   
     </div>
 
 
-    
-    <div class="boundry" cdkDropList (cdkDropListDropped)="drop($event)" >
-      
-    </div>
   
   </div>
   

@@ -13,7 +13,7 @@ module.exports.newIssueRequest = (req, res) =>{
         else{
             console.log(data);
             console.log("BANG!")
-            res.send("bleh");
+            res.send("{rep:'yes'}");
         }
     })
 
