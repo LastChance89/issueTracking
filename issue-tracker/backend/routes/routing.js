@@ -20,5 +20,5 @@ routing.use(express.json());
 
 routing.route('/newCard').post(issueRequestController.newIssueRequest);
 routing.route('/getAllCards').post(issueRequestController.findAllIssues);
-
+routing.route('/updateIssueRequest').post(issueRequestController.updateIssueRequest);
 module.exports = routing;

@@ -8,6 +8,6 @@ let Card = mongoose.Schema({
     priority: Number, 
     assignedUser: String, 
     summary:String,
-    idNo: Number
+    _id: String
 }, {collection: 'Issues'});
 module.exports = mongoose.model('Card',Card);

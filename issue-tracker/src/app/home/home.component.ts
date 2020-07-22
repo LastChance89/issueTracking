@@ -17,26 +17,22 @@ export class HomeComponent implements OnInit {
   testing: Card[] = [];
   approval: Card[] = [];
   completed: Card[] = [];
-
-
- 
-
+  
   ngOnInit() {
-    let cards: Card[] = [];
     this.cardService.getAllCards().subscribe(result => {
       console.log(result);
       result.forEach(element => {
-        switch(element.priority){    
-          case 1:
+        switch(element.status){    
+          case "In Progress":
             this.inProgress.push(element);
             break;
-          case 2:
+          case "Testing":
             this.testing.push(element);
             break;
-          case 3:
+          case "Approval":
             this.approval.push(element);
             break;
-          case 4:
+          case "Completed":
             this.completed.push(element);
             break;
           default: 
@@ -66,6 +62,31 @@ export class HomeComponent implements OnInit {
     else {
       transferArrayItem(event.previousContainer.data, event.container.data,
         event.previousIndex, event.currentIndex);
+
+        let cardID = event.container.data[event.currentIndex]['_id'];
+        let cardStatus: String;
+
+        switch(event.container.element.nativeElement.id){
+          case 'new':
+            cardStatus = "New"
+            break;
+          case "inp":
+            cardStatus = "In Progress";
+            break;
+          case "test":
+            cardStatus = "Testing";
+            break;
+          case "aprov":
+            cardStatus = "Approval"
+            break;
+          case "complete":
+            cardStatus = "Completed";
+            break;
+        }
+
+        this.cardService.updateCard(cardID, cardStatus).subscribe(result =>{
+          console.log(result);
+        });
     }
 
   }

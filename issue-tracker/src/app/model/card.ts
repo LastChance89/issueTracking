@@ -5,6 +5,6 @@ export class Card {
     priority: number; 
     assignedUser: string; 
     summary:string;
-    idNo: number; 
+    _id: number;
 }
 
