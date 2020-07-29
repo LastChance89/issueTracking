@@ -13,7 +13,7 @@ app.use('/',routes);
 const datbaseUrl = "mongodb://localhost:27017/IssueTracker";
 mongoose.connect(datbaseUrl,{useNewUrlParser: true})
 .then(() => console.log("Connection to MongoDB succsesfull"))
-.catch((err) => console.log("Error"));
+.catch((err) => console.log(err));
 
 console.log('start');
 

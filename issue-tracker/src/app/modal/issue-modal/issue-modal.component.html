@@ -29,7 +29,7 @@
     </h4>
     <div>
         <select [(ngModel)] = "card.status">
-            <option *ngFor = "let status of statusTypes">{{status}}</option>
+            <option *ngFor = "let status of statusTypes" [ngValue] =status[1] >{{status[0]}}</option>
         </select>
     </div> 
     <h4>
@@ -37,8 +37,8 @@
     </h4> 
     <div>
         <select [(ngModel)]="card.priority">
-            <option *ngFor = "let priority of priorities" [ngValue] =priorities.indexOf(priority)> 
-                {{priority}}
+            <option *ngFor = "let priority of priorities" [ngValue] =priority[1]> 
+                {{priority[0]}}
             </option>
         </select>
     </div>

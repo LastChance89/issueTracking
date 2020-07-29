@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Card } from '../model/card';
 import { Observable } from 'rxjs';
+import { Result } from '../model/result';
 
 
 @Injectable({
@@ -13,19 +14,17 @@ export class CardService {
 
   url = 'http://localhost:3000';
 
-  newCard(card: Card) : Observable<Card>{
+  newCard(card: Card) : Observable<Result>{
     let payload = {"card" :card}
-    return this.http.post<Card>(this.url+'/newCard',payload);
+    return this.http.post<Result>(this.url+'/newCard',payload);
   }
 
-  getAllCards(): Observable<Card[]>{
-    return this.http.post<Card[]>(this.url+'/getAllCards','')
+  getAllCards(): Observable<any>{
+    return this.http.post<any>(this.url+'/getAllCards','')
   }
 
   updateCard(requestId, requestStatus){
     let payload = {'id':requestId,'status':requestStatus};
     return this.http.post(this.url+'/updateIssueRequest',payload);
   }
-
-
 }

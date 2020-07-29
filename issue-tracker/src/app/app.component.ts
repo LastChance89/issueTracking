@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { Card } from './model/card';
 import{CardService} from './service/cardservice.service'
 import { ModalService } from './service/modal.service';
+import { Result } from './model/result';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

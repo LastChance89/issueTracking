@@ -15,6 +15,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { IssueModalComponent } from './modal/issue-modal/issue-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { MessageModalComponent } from './modal/message-modal/message-modal.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FormsModule } from '@angular/forms';
     EnhancementComponent,
     DefectComponent,
     FeatureComponent,
-    IssueModalComponent
+    IssueModalComponent,
+    MessageModalComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { FormsModule } from '@angular/forms';
   exports:[
     DragDropModule
   ],
-  entryComponents:[IssueModalComponent],
+  entryComponents:[IssueModalComponent,MessageModalComponent],
   providers: [CardService],
   bootstrap: [AppComponent]
 })

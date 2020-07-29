@@ -21,33 +21,13 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.cardService.getAllCards().subscribe(result => {
       console.log(result);
-      result.forEach(element => {
-        switch(element.status){    
-          case "In Progress":
-            this.inProgress.push(element);
-            break;
-          case "Testing":
-            this.testing.push(element);
-            break;
-          case "Approval":
-            this.approval.push(element);
-            break;
-          case "Completed":
-            this.completed.push(element);
-            break;
-          default: 
-            this.new.push(element);
-            break;
-        }
-        if (element.status === "New Functionality") {
-          this.new.push(element);
-        }
-        if (element.status === "Defect") {
-          this.inProgress.push(element);
-        }
-      });
+      this.new = result['new'];
+      this.inProgress = result['inProgress'];
+      this.testing = result['testing'];
+      this.approval = result['approval'];
+      this.completed = result['completed'];
+
     },
-      //Make me error modal with better errors. 
     error => {
       console.log("error")
     }
@@ -64,23 +44,23 @@ export class HomeComponent implements OnInit {
         event.previousIndex, event.currentIndex);
 
         let cardID = event.container.data[event.currentIndex]['_id'];
-        let cardStatus: String;
+        let cardStatus: number;
 
         switch(event.container.element.nativeElement.id){
-          case 'new':
-            cardStatus = "New"
-            break;
           case "inp":
-            cardStatus = "In Progress";
+            cardStatus=1;
             break;
           case "test":
-            cardStatus = "Testing";
+            cardStatus=2;
             break;
           case "aprov":
-            cardStatus = "Approval"
+            cardStatus=3;
             break;
           case "complete":
-            cardStatus = "Completed";
+            cardStatus=4;
+            break;
+          default: //new status is default. 
+            cardStatus = 0;
             break;
         }
 

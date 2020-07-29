@@ -1,7 +1,7 @@
 export class Card {
     type: string;
     title: string; 
-    status: String;
+    status: number;
     priority: number; 
     assignedUser: string; 
     summary:string;
