@@ -22,10 +22,12 @@ export class ModalService {
   openIssueModal(){
     const modalRef = this.ngbModal.open(IssueModalComponent, this.options);
     modalRef.result.then((data)=>{
-      this.result = data;
+      //Data undefined means weve just closed the modal. 
+      if(data != undefined  && data != null){
+        const messageRef = this.ngbModal.open(MessageModalComponent, this.options);
+        messageRef.componentInstance.result = data;
+      }
     })
-   // console.log(modalRef.componentInstance.result);
-   //
   }
 
   openMessageModal(isError: boolean, message: String){

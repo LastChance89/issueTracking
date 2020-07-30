@@ -17,7 +17,9 @@ export class HomeComponent implements OnInit {
   testing: Card[] = [];
   approval: Card[] = [];
   completed: Card[] = [];
-  
+
+  private colHeight: number = 800; //default height
+
   ngOnInit() {
     this.cardService.getAllCards().subscribe(result => {
       console.log(result);
@@ -26,7 +28,9 @@ export class HomeComponent implements OnInit {
       this.testing = result['testing'];
       this.approval = result['approval'];
       this.completed = result['completed'];
+      this.setHeight();
 
+      //100px
     },
     error => {
       console.log("error")
@@ -34,6 +38,20 @@ export class HomeComponent implements OnInit {
     );
   }
   cardList = []
+
+
+  setHeight(){
+    let longest = 0;
+    let masterArray = [this.new,this.inProgress,this.testing,this.approval,this.completed];
+    //First check what the longest 
+    for(let array of masterArray){
+        if(array.length > longest){
+          longest = array.length;
+        }
+    }
+
+    this.colHeight = longest * 108;
+  }
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -65,8 +83,10 @@ export class HomeComponent implements OnInit {
         }
 
         this.cardService.updateCard(cardID, cardStatus).subscribe(result =>{
-          console.log(result);
+
+          this.setHeight();
         });
+       
     }
 
   }

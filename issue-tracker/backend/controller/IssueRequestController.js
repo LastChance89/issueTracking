@@ -87,6 +87,10 @@ module.exports.updateIssueRequest = (req,res) =>{
             let result = new Result(messageObj.messages.CREATE_REQUEST_FAIL,true);
             res.json(result);
         }
+        else{
+            let result = new Result(messageObj.CREATE_REQUEST_SUCCESS,false);
+            res.json(result);
+        }
     })
 }
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
+import { Result } from 'src/app/model/result';
 
 @Component({
   selector: 'app-message-modal',
@@ -11,9 +12,7 @@ export class MessageModalComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) { }
 
-  private message: string; 
-  private isError: boolean;
-
+  private result: Result;
 
   ngOnInit() {
   }
@@ -21,5 +20,6 @@ export class MessageModalComponent implements OnInit {
   close(){
     this.activeModal.close();
   }
+  
 
 }
