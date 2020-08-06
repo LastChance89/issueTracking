@@ -3,6 +3,7 @@ import { Card } from 'src/app/model/card';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { Subscription, fromEvent } from 'rxjs';
+import { CardService } from 'src/app/service/cardservice.service';
 
 @Component({
   selector: 'app-sub-menu',
@@ -16,15 +17,13 @@ export class SubMenuComponent implements OnInit {
   private overlayRef: OverlayRef;
 
   @ViewChild('subMenu',{static:true}) subMenuComponent: TemplateRef<ElementRef>;
-  constructor(private overlay: Overlay,public viewContainerRef: ViewContainerRef)
+  constructor(private overlay: Overlay,public viewContainerRef: ViewContainerRef, private cardService: CardService)
    {}
 
   ngOnInit() {
   }
 
-
   open({x,y}, card) {
-    console.log(this.subMenuComponent.elementRef);
     this.card = card;
     //Close the last sub menu so we dont have multiple. 
     this.close();
@@ -33,8 +32,8 @@ export class SubMenuComponent implements OnInit {
       .withPositions([
         {
           originX: 'end',
-          originY: 'bottom',
-          overlayX: 'end',
+          originY: 'center',
+          overlayX: 'center',
           overlayY: 'top',
         }
       ]);
@@ -48,6 +47,7 @@ export class SubMenuComponent implements OnInit {
 
   
   close() {
+
     if (this.overlayRef) {
       this.overlayRef.dispose();
       this.overlayRef = null;
@@ -55,8 +55,15 @@ export class SubMenuComponent implements OnInit {
   }
 
   delete(){
+   this.cardService.deleteCard(this.card._id).subscribe( result =>{
+      //if sucsess: display sucsess message then ok and close. 
+      //else: Error message and then close. 
+      console.log(result);
+   },
+   error=>{
+     console.log(error);
+   })
    this.close(); 
   }
-
 
 }

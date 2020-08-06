@@ -11,7 +11,7 @@
     <div class="boundry-header">
       <p>In Progress</p>
     </div>
-    <app-card class="card" *ngFor="let card of inProgress;" [(card)]="card" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of inProgress;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
 
   </div>
 
@@ -19,7 +19,7 @@
     <div class="boundry-header">
       <p>Testing</p>
     </div>
-    <app-card class="card" *ngFor="let card of testing;" [(card)]="card" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of testing;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
 
   </div>
 
@@ -27,7 +27,7 @@
     <div class="boundry-header">
       <p>Approval</p>
     </div>
-    <app-card class="card" *ngFor="let card of approval;" [(card)]="card" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of approval;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
 
   </div>
 
@@ -35,7 +35,7 @@
     <div class="boundry-header">
       <p>Completed</p>
     </div>
-    <app-card class="card" *ngFor="let card of completed;" [(card)]="card" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of completed;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
 
   </div>
 

@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit  {
 ngOnInit() {
   //this.subMenuComponent.test()
   this.cardService.getAllCards().subscribe(result => {
-   // console.log(result);
     this.new = result['new'];
     this.inProgress = result['inProgress'];
     this.testing = result['testing'];
@@ -94,7 +93,7 @@ openSubMenu({x,y}: MouseEvent, card, event){
         }
 
         this.cardService.updateCard(cardID, cardStatus).subscribe(result =>{
-          //Update the height after we move the card areas.
+          //Update the height after we move the card across status's.
           this.setHeight();
         });
        

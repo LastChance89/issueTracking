@@ -5,6 +5,7 @@ let Card = require('../models/card');
 let messageObj = require('../models/messages')
 let result = require('../models/result');
 const Result = require('../models/result');
+const { json } = require('body-parser');
 
 module.exports.newIssueRequest = (req, res) =>{
    let idTime =  Date.now();
@@ -94,4 +95,15 @@ module.exports.updateIssueRequest = (req,res) =>{
     })
 }
 
-
+module.exports.deleteIssue = (req,res) =>{
+    let id = req.body['id'];
+    Card.deleteOne({_id: id}, (error, result)=>{
+        if(error){
+            console.log("BANG", error);
+        }
+        else{
+            let result = new Result(messageObj.DELETE_REQUEST_SUCCESS +id, false);
+            res.json(result);
+        }
+    })
+}

@@ -5,10 +5,10 @@
       <div (click)="delete(request)" class="select-opt">
         Delete {{card._id}}
       </div>
-      <div class="select-opt">
+      <div (click)="quickCreate()" class="select-opt">
         Quick Create
       </div>
-      <div class="select-opt">
+      <div (click)= "quickEdit()" class="select-opt">
         Quick Edit
       </div>
     </div>
