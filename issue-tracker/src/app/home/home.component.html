@@ -1,10 +1,10 @@
 <div class="container" cdkDropListGroup>
 
-  <div id="new" class="boundry"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="new">
+  <div id="new" class="boundry"   [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="new">
     <div class="boundry-header">
       <p>New</p>
     </div>
-    <app-card class="card" *ngFor="let card of new;" [(card)]="card" cdkDrag></app-card>
+    <app-card  class="card" *ngFor="let card of new;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
   </div>
 
   <div id="inp" class="boundry" [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="inProgress">
@@ -39,4 +39,9 @@
 
   </div>
 
+
+<app-sub-menu>
+</app-sub-menu>
+
 </div>
+

@@ -1,0 +1,18 @@
+<ng-template  #subMenu>
+  <div (closeSubMenu)="close()" class="selection-body">
+
+    <div class="selection-menu">
+      <div (click)="delete(request)" class="select-opt">
+        Delete {{card._id}}
+      </div>
+      <div class="select-opt">
+        Quick Create
+      </div>
+      <div class="select-opt">
+        Quick Edit
+      </div>
+    </div>
+
+  </div>
+
+</ng-template>

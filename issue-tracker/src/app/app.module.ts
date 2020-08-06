@@ -16,6 +16,10 @@ import { IssueModalComponent } from './modal/issue-modal/issue-modal.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { MessageModalComponent } from './modal/message-modal/message-modal.component';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { MatNativeDateModule, MatMenuTrigger } from '@angular/material';
+import { SubMenuComponent } from './modal/sub-menu/sub-menu.component';
+import { CloseSubMenuUtil } from './util/close-submenu-util.directive'
 
 @NgModule({
   declarations: [
@@ -27,7 +31,9 @@ import { MessageModalComponent } from './modal/message-modal/message-modal.compo
     DefectComponent,
     FeatureComponent,
     IssueModalComponent,
-    MessageModalComponent
+    MessageModalComponent,
+    SubMenuComponent,
+    CloseSubMenuUtil
   ],
   imports: [
     BrowserModule,
@@ -36,7 +42,9 @@ import { MessageModalComponent } from './modal/message-modal/message-modal.compo
     HttpClientModule,
     DragDropModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    OverlayModule
+    ,MatNativeDateModule
   ],
   exports:[
     DragDropModule

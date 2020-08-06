@@ -8,3 +8,21 @@ h4{
     margin-top: 8px;
     margin-bottom: 8px;
 }
+
+.proj-layout{
+    display: flex;
+}
+.proj-name{
+    padding-left: 40px;
+}
+.proj-status{
+    padding-left: 82px;
+}
+
+.move-left{
+    float: left;
+}
+
+th{
+    padding-right:25px;
+}

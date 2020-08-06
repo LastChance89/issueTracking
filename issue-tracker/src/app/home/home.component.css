@@ -9,7 +9,6 @@
   
   .boundry {
     width: 250px;
-    /*height: 100%; */
     border: solid 1px #ccc;
     display: block;
     background-color: rgb(232, 232, 232);
@@ -71,3 +70,6 @@
     padding-top: 1px;
     margin-bottom: 5px;
   }
+
+
+  

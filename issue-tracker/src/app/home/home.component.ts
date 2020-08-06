@@ -1,16 +1,44 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef, ViewContainerRef, ViewChildren, QueryList, ContentChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Card } from '../model/card';
 import { CardService } from '../service/cardservice.service';
+import { SubMenuComponent } from '../modal/sub-menu/sub-menu.component';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit  {
 
-  constructor(private cardService: CardService) { }
+  constructor(private cardService: CardService, ) { }
+ 
+  @ViewChild(SubMenuComponent,{static:true}) subMenuComponent: SubMenuComponent;
+
+
+ngOnInit() {
+  //this.subMenuComponent.test()
+  this.cardService.getAllCards().subscribe(result => {
+   // console.log(result);
+    this.new = result['new'];
+    this.inProgress = result['inProgress'];
+    this.testing = result['testing'];
+    this.approval = result['approval'];
+    this.completed = result['completed'];
+    this.setHeight();
+  },
+  error => {
+    console.log("error")
+  }
+  );
+}
+
+
+
+openSubMenu({x,y}: MouseEvent, card, event){
+  event.preventDefault();
+  this.subMenuComponent.open({x,y},card);
+}
 
   new: Card[] = [];
   inProgress: Card[] = [];
@@ -20,25 +48,8 @@ export class HomeComponent implements OnInit {
 
   private colHeight: number = 800; //default height
 
-  ngOnInit() {
-    this.cardService.getAllCards().subscribe(result => {
-      console.log(result);
-      this.new = result['new'];
-      this.inProgress = result['inProgress'];
-      this.testing = result['testing'];
-      this.approval = result['approval'];
-      this.completed = result['completed'];
-      this.setHeight();
 
-      //100px
-    },
-    error => {
-      console.log("error")
-    }
-    );
-  }
   cardList = []
-
 
   setHeight(){
     let longest = 0;
@@ -83,11 +94,16 @@ export class HomeComponent implements OnInit {
         }
 
         this.cardService.updateCard(cardID, cardStatus).subscribe(result =>{
-
+          //Update the height after we move the card areas.
           this.setHeight();
         });
        
     }
 
   }
+
+
+
+
+
 }

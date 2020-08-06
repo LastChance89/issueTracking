@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardService } from 'src/app/service/cardservice.service';
 import { Card } from 'src/app/model/card';
-import { ModalService } from 'src/app/service/modal.service';
-import { Result } from 'src/app/model/result';
+
 
 @Component({
   selector: 'app-issue-modal',
@@ -46,3 +45,34 @@ export class IssueModalComponent implements OnInit {
   }
 
 }
+
+/*
+Defect: 
+Reported by Internal, External 
+Reporter: Reporter Object has fields Name, contact information (phone, email address), 
+project 
+defect area 
+Assigned release: TBD, Version number. Drop down based on metadata? Pathc Number?
+Assignee: Gotta create a drop down list of users. 
+Summary
+
+New Functionality:
+Project
+Assignee 
+Assigned release 
+
+
+Enhacnement: 
+Project
+Assignee 
+Assigned release
+
+General Request: 
+standard fields only. 
+
+Service Request: 
+Reporter: Reporter Object has fields Name, contact information (phone, email address)
+Service Request : Account unlock, Data Restore, Deletion request, etc....
+Assignee 
+
+*/

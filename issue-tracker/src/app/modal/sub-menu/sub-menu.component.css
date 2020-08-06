@@ -1,0 +1,18 @@
+.selection-menu{
+    z-index: 1000;
+    width: 200px;
+}
+.selection-menu div:hover{
+    background-color: black;
+    color: white;
+}
+
+.selection-body{
+    height: 85px;
+    background: rgb(201 196 195);
+    margin-top: 10px;
+}
+.select-opt{
+    padding-top: 5px;
+    padding: 0.5px 20px 10px 0px;
+}
