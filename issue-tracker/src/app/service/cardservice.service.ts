@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Card } from '../model/card';
 import { Observable } from 'rxjs';
 import { Result } from '../model/result';
-import { request } from 'http';
+
 
 
 @Injectable({

@@ -20,6 +20,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatNativeDateModule, MatMenuTrigger } from '@angular/material';
 import { SubMenuComponent } from './modal/sub-menu/sub-menu.component';
 import { CloseSubMenuUtil } from './util/close-submenu-util.directive'
+import {RefreshServiceUtil} from './service/refresh-service-util';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,7 @@ import { CloseSubMenuUtil } from './util/close-submenu-util.directive'
     DragDropModule
   ],
   entryComponents:[IssueModalComponent,MessageModalComponent],
-  providers: [CardService],
+  providers: [CardService,RefreshServiceUtil],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

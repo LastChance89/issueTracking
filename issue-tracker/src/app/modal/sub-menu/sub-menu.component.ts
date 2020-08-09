@@ -2,8 +2,8 @@ import { Component, OnInit, Input, ViewContainerRef, TemplateRef, ViewChild, Ele
 import { Card } from 'src/app/model/card';
 import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
-import { Subscription, fromEvent } from 'rxjs';
 import { CardService } from 'src/app/service/cardservice.service';
+import { ModalService } from 'src/app/service/modal.service';
 
 @Component({
   selector: 'app-sub-menu',
@@ -17,7 +17,8 @@ export class SubMenuComponent implements OnInit {
   private overlayRef: OverlayRef;
 
   @ViewChild('subMenu',{static:true}) subMenuComponent: TemplateRef<ElementRef>;
-  constructor(private overlay: Overlay,public viewContainerRef: ViewContainerRef, private cardService: CardService)
+  constructor(private overlay: Overlay,public viewContainerRef: ViewContainerRef, private cardService: CardService,
+    private modalService: ModalService)
    {}
 
   ngOnInit() {
@@ -47,15 +48,19 @@ export class SubMenuComponent implements OnInit {
 
   
   close() {
-
     if (this.overlayRef) {
       this.overlayRef.dispose();
       this.overlayRef = null;
     }
   }
 
+  //---------------------------------------------------------------------------
+  //sub menu methods. 
+  //---------------------------------------------------------------------------
+  
   delete(){
-   this.cardService.deleteCard(this.card._id).subscribe( result =>{
+   this.cardService.deleteCard(this.card._id).subscribe( result =>{      
+      
       //if sucsess: display sucsess message then ok and close. 
       //else: Error message and then close. 
       console.log(result);
@@ -64,6 +69,11 @@ export class SubMenuComponent implements OnInit {
      console.log(error);
    })
    this.close(); 
+  }
+  
+  quickCreate(){
+    this.close();
+    this.modalService.openIssueModal();
   }
 
 }

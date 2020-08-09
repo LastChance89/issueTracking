@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardService } from 'src/app/service/cardservice.service';
 import { Card } from 'src/app/model/card';
+import { RefreshServiceUtil } from 'src/app/service/refresh-service-util';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { Card } from 'src/app/model/card';
 })
 export class IssueModalComponent implements OnInit {
 
-  constructor(public activeModal: NgbActiveModal, private cardService: CardService) { }
+  constructor(public activeModal: NgbActiveModal, private cardService: CardService, private refreshService: RefreshServiceUtil) { }
 
   card :Card = new Card();
 
@@ -33,6 +34,7 @@ export class IssueModalComponent implements OnInit {
     console.log(this.card);
     this.cardService.newCard(this.card).subscribe(result =>{
       this.activeModal.close(result);
+      this.refreshService.refreshCards();
     },
     error =>{
       return error;

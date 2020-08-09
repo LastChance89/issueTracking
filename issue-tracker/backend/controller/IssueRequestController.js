@@ -28,7 +28,7 @@ module.exports.newIssueRequest = (req, res) =>{
  
     Card.create(newRequest,(error, data)=>{
         if(error){
-            let result = new Result(messageObj.messages.CREATE_REQUEST_FAIL,true);
+            let result = new Result(messageObj.messages.node,true);
             res.json(result);
         }
         else{
