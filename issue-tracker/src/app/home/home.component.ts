@@ -53,10 +53,11 @@ export class HomeComponent implements OnInit {
   }
 
 
-  openSubMenu({ x, y }: MouseEvent, card, event) {
+  openSubMenu({ x, y }: MouseEvent, event, card? ) {
     event.preventDefault();
     this.subMenuComponent.open({ x, y }, card);
   }
+  
 
   setHeight() {
     let longest = 0;

@@ -30,10 +30,9 @@ export class ModalService {
     })
   }
 
-  openMessageModal(isError: boolean, message: String){
+  openMessageModal(result: Result){
     const modalRef = this.ngbModal.open(MessageModalComponent,this.options);
-    modalRef.componentInstance.message = message;
-    modalRef.componentInstance.isError = isError;
+    modalRef.componentInstance.result = result;
   }
 
 }

@@ -89,7 +89,7 @@ module.exports.updateIssueRequest = (req,res) =>{
             res.json(result);
         }
         else{
-            let result = new Result(messageObj.CREATE_REQUEST_SUCCESS,false);
+            let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS,false);
             res.json(result);
         }
     })
@@ -102,7 +102,7 @@ module.exports.deleteIssue = (req,res) =>{
             console.log("BANG", error);
         }
         else{
-            let result = new Result(messageObj.DELETE_REQUEST_SUCCESS +id, false);
+            let result = new Result(messageObj.messages.DELETE_REQUEST_SUCCESS + id, false);
             res.json(result);
         }
     })

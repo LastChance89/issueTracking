@@ -1,17 +1,17 @@
-<div class="container" cdkDropListGroup>
+<div class="container" (contextmenu)="openSubMenu($event,$event)" cdkDropListGroup>
 
   <div id="new" class="boundry"   [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="new">
     <div class="boundry-header">
       <p>New</p>
     </div>
-    <app-card  class="card" *ngFor="let card of new;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
+    <app-card  class="card" *ngFor="let card of new;" [(card)]="card" (contextmenu)="openSubMenu($event, $event, card)" cdkDrag></app-card>
   </div>
 
   <div id="inp" class="boundry" [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="inProgress">
     <div class="boundry-header">
       <p>In Progress</p>
     </div>
-    <app-card class="card" *ngFor="let card of inProgress;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of inProgress;" [(card)]="card" (contextmenu)="openSubMenu($event, $event, card)" cdkDrag></app-card>
 
   </div>
 
@@ -19,7 +19,7 @@
     <div class="boundry-header">
       <p>Testing</p>
     </div>
-    <app-card class="card" *ngFor="let card of testing;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of testing;" [(card)]="card" (contextmenu)="openSubMenu($event, $event, card)" cdkDrag></app-card>
 
   </div>
 
@@ -27,7 +27,7 @@
     <div class="boundry-header">
       <p>Approval</p>
     </div>
-    <app-card class="card" *ngFor="let card of approval;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of approval;" [(card)]="card" (contextmenu)="openSubMenu($event, $event, card)" cdkDrag></app-card>
 
   </div>
 
@@ -35,7 +35,7 @@
     <div class="boundry-header">
       <p>Completed</p>
     </div>
-    <app-card class="card" *ngFor="let card of completed;" [(card)]="card" (contextmenu)="openSubMenu($event, card, $event)" cdkDrag></app-card>
+    <app-card class="card" *ngFor="let card of completed;" [(card)]="card" (contextmenu)="openSubMenu($event, $event, card)"cdkDrag></app-card>
 
   </div>
 

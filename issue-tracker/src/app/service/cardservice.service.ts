@@ -32,7 +32,7 @@ export class CardService {
   deleteCard(requestId){
     console.log(requestId);
     let payload = {'id': requestId};
-    return this.http.post(this.url+'/deleteIssue',payload);
+    return this.http.post<Result>(this.url+'/deleteIssue',payload);
   }
 
 }

@@ -4,6 +4,7 @@ import { Overlay, OverlayRef } from '@angular/cdk/overlay';
 import { TemplatePortal } from '@angular/cdk/portal';
 import { CardService } from 'src/app/service/cardservice.service';
 import { ModalService } from 'src/app/service/modal.service';
+import { RefreshServiceUtil } from 'src/app/service/refresh-service-util';
 
 @Component({
   selector: 'app-sub-menu',
@@ -18,14 +19,16 @@ export class SubMenuComponent implements OnInit {
 
   @ViewChild('subMenu',{static:true}) subMenuComponent: TemplateRef<ElementRef>;
   constructor(private overlay: Overlay,public viewContainerRef: ViewContainerRef, private cardService: CardService,
-    private modalService: ModalService)
+    private modalService: ModalService, private refreshService: RefreshServiceUtil)
    {}
 
   ngOnInit() {
   }
 
-  open({x,y}, card) {
-    this.card = card;
+  open({x,y}, card?) {
+    if(card != undefined){
+      this.card = card;
+    }
     //Close the last sub menu so we dont have multiple. 
     this.close();
     const positionStrategy = this.overlay.position()
@@ -46,6 +49,7 @@ export class SubMenuComponent implements OnInit {
     this.overlayRef.attach(new TemplatePortal(this.subMenuComponent, this.viewContainerRef));
   }
 
+
   
   close() {
     if (this.overlayRef) {
@@ -63,7 +67,8 @@ export class SubMenuComponent implements OnInit {
       
       //if sucsess: display sucsess message then ok and close. 
       //else: Error message and then close. 
-      console.log(result);
+      this.refreshService.refreshCards();
+      this.modalService.openMessageModal(result);
    },
    error=>{
      console.log(error);
