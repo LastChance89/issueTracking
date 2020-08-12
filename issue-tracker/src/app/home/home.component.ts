@@ -21,13 +21,13 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(SubMenuComponent, { static: true }) subMenuComponent: SubMenuComponent;
   private new: Card[] = [];
-  inProgress: Card[] = [];
-  testing: Card[] = [];
-  approval: Card[] = [];
-  completed: Card[] = [];
-  cardList = []
+  private inProgress: Card[] = [];
+  private testing: Card[] = [];
+  private approval: Card[] = [];
+  private completed: Card[] = [];
+  private cardList = []
 
-
+  private currCard : Card;
   private colHeight: number = 800; //default height
 
 
@@ -52,12 +52,31 @@ export class HomeComponent implements OnInit {
     );
   }
 
-
-  openSubMenu({ x, y }: MouseEvent, event, card? ) {
+  /*
+  If we click a card, we set the current card we have clicked. This is because 
+  in order to have a sub menu with varying options within the entire card area, 
+  we cant just put the open sub menu on the  card and the area otherwise we end up with 2 
+  menu's poping up. This way, right click on the card, and then the second call endsup calling 
+  the actual open menu method, openSubMenu 
+  */
+  setCurrentCard( card ) {
     event.preventDefault();
-    this.subMenuComponent.open({ x, y }, card);
+    this.currCard = card;
+    
   }
-  
+
+  /*
+  This sits on the top level DIV, that way where we click within the grid, 
+  we can then open various sub menu options. 
+  We then pass the current card into the sub menu component in order to display the card, if its not 
+  undefined.  
+  */
+  openSubMenu({ x, y }: MouseEvent, event ) {
+    event.preventDefault();
+
+    this.subMenuComponent.open({ x, y }, this.currCard);
+    this.currCard = undefined;
+  }
 
   setHeight() {
     let longest = 0;
@@ -68,7 +87,6 @@ export class HomeComponent implements OnInit {
         longest = array.length;
       }
     }
-
     this.colHeight = longest * 108;
   }
 

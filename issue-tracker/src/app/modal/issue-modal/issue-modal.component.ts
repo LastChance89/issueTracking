@@ -16,6 +16,9 @@ export class IssueModalComponent implements OnInit {
 
   card :Card = new Card();
 
+    //Move these to metadata? load and cache? admin functionality maybe to update on fly. 
+  //How customizeable do I feel like making this. 
+  //Need to look at how I should handle MongoDB setup. 
   cardTypes: String[] = ["New Functionality","Enhancement","Defect","Generic Request"]
   priorities = [["Very Low",0], ["Low",1], ["Medium",2],["High",3],["Very High",4]];
   statusTypes = [["New",0], ["In Progress",1],["Testing",2],["Approval",3],["Completed",4]];
@@ -31,7 +34,6 @@ export class IssueModalComponent implements OnInit {
   }
   create(e){
     e.preventDefault();
-    console.log(this.card);
     this.cardService.newCard(this.card).subscribe(result =>{
       this.activeModal.close(result);
       this.refreshService.refreshCards();

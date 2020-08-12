@@ -7,9 +7,16 @@ let result = require('../models/result');
 const Result = require('../models/result');
 const { json } = require('body-parser');
 
+
+/*
+@TODO: Move alot of this logic into a service. 
+*/
+
 module.exports.newIssueRequest = (req, res) =>{
+    //Get current time in milliseconds. 
    let idTime =  Date.now();
    let newRequest =new Card(req.body['card']);
+   
    switch(newRequest.type){
        case 'Enhancement' :
             newRequest._id = 'E' + idTime;
@@ -49,11 +56,13 @@ module.exports.findAllIssues = (req, res)=>{
     'testing':testing, "approval": approval,'completed': completed } 
 
     Card.find((error,data)=>{
+        //@TODO: need to fix the error. 
         if(error){
             console.log("error")
             console.log(error);
         }
         else{
+            //Move these options to metadata?
             data.forEach(element=>{
                 switch(element.status){    
                     case 1:

@@ -19,18 +19,22 @@ export class SubMenuComponent implements OnInit {
 
   @ViewChild('subMenu',{static:true}) subMenuComponent: TemplateRef<ElementRef>;
   constructor(private overlay: Overlay,public viewContainerRef: ViewContainerRef, private cardService: CardService,
-    private modalService: ModalService, private refreshService: RefreshServiceUtil)
-   {}
+    private modalService: ModalService, private refreshService: RefreshServiceUtil){}
 
   ngOnInit() {
   }
 
+  //---------------------------------------------------------------------------
+  //sub menu control methods. 
+  //---------------------------------------------------------------------------
+  
+
+  //Card is optional as we might not pass it, but due to changes in the component that calls it maybe remove it alltogeather?
   open({x,y}, card?) {
-    if(card != undefined){
-      this.card = card;
-    }
     //Close the last sub menu so we dont have multiple. 
     this.close();
+    this.card = card;
+    
     const positionStrategy = this.overlay.position()
       .flexibleConnectedTo({ x, y })
       .withPositions([
@@ -50,7 +54,13 @@ export class SubMenuComponent implements OnInit {
   }
 
 
+
+
+  //---------------------------------------------------------------------------
+  //sub menu functional methods. 
+  //---------------------------------------------------------------------------
   
+    
   close() {
     if (this.overlayRef) {
       this.overlayRef.dispose();
@@ -58,15 +68,9 @@ export class SubMenuComponent implements OnInit {
     }
   }
 
-  //---------------------------------------------------------------------------
-  //sub menu methods. 
-  //---------------------------------------------------------------------------
-  
   delete(){
    this.cardService.deleteCard(this.card._id).subscribe( result =>{      
-      
-      //if sucsess: display sucsess message then ok and close. 
-      //else: Error message and then close. 
+
       this.refreshService.refreshCards();
       this.modalService.openMessageModal(result);
    },
@@ -80,5 +84,6 @@ export class SubMenuComponent implements OnInit {
     this.close();
     this.modalService.openIssueModal();
   }
+  
 
 }
