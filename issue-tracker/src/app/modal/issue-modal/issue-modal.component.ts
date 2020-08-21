@@ -5,6 +5,7 @@ import { Card } from 'src/app/model/card';
 import { RefreshServiceUtil } from 'src/app/service/refresh-service-util';
 
 
+
 @Component({
   selector: 'app-issue-modal',
   templateUrl: './issue-modal.component.html',
@@ -14,9 +15,11 @@ export class IssueModalComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal, private cardService: CardService, private refreshService: RefreshServiceUtil) { }
 
-  card :Card = new Card();
+  private card :Card = new Card();
+  private disable: Boolean = false;
+  private update: Boolean = true;
 
-    //Move these to metadata? load and cache? admin functionality maybe to update on fly. 
+  //Move these to metadata? load and cache? admin functionality maybe to update on fly. 
   //How customizeable do I feel like making this. 
   //Need to look at how I should handle MongoDB setup. 
   cardTypes: String[] = ["New Functionality","Enhancement","Defect","Generic Request"]
@@ -30,6 +33,8 @@ export class IssueModalComponent implements OnInit {
       this.card.priority = 0;
       this.card.assignedUser = "Not Assigned"
       this.card.status = 0;
+      this.disable = false;
+      this.update = false;
     }
   }
   create(e){
@@ -47,7 +52,12 @@ export class IssueModalComponent implements OnInit {
   close(e){
     this.activeModal.close();
   }
-
+  updateCard(){
+    this.cardService.updateCard(this.card).subscribe(result=>{
+      console.log("BANG BABVY!");
+      console.log(result);
+    })
+  }
 }
 
 /*

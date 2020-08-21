@@ -84,6 +84,11 @@ export class SubMenuComponent implements OnInit {
     this.close();
     this.modalService.openIssueModal();
   }
+
+  quickEdit(){
+    this.close();
+    this.modalService.openIssueModal(this.card);
+  }
   
 
 }

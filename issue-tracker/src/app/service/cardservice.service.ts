@@ -24,10 +24,17 @@ export class CardService {
     return this.http.post<any>(this.url+'/getAllCards','')
   }
 
-  updateCard(requestId, requestStatus){
+  //Need to change my name to updatecardStats, this hsould be only used for moving across status's. 
+  updateCardStatus(requestId, requestStatus){
     let payload = {'id':requestId,'status':requestStatus};
-    return this.http.post(this.url+'/updateIssueRequest',payload);
+    return this.http.post(this.url+'/updateIssueRequestStatus',payload);
   }
+
+  updateCard(card: Card){
+    let payload = {'card':card}
+    return this.http.post<Result>(this.url+'/updateIssueRequest',payload);
+  }
+  
 
   deleteCard(requestId){
     console.log(requestId);

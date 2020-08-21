@@ -11,6 +11,7 @@ export class ModalService {
   constructor(private ngbModal: NgbModal) { }
 
   private result: Result;
+  private update: Boolean = false;
   
   options: NgbModalOptions = {
     backdrop: 'static',
@@ -19,8 +20,12 @@ export class ModalService {
   };
   
 
-  openIssueModal(){
+  openIssueModal(card?){
     const modalRef = this.ngbModal.open(IssueModalComponent, this.options);
+    if(card != undefined){
+      modalRef.componentInstance.card = card;
+    }
+    
     modalRef.result.then((data)=>{
       //Data undefined means weve just closed the modal. 
       if(data != undefined  && data != null){

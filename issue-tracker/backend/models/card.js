@@ -5,6 +5,7 @@ let Card = mongoose.Schema({
     type: String,
     status: Number,
     priority: Number, 
+    project: String,
     assignedUser: String, 
     summary:String,
     _id: String

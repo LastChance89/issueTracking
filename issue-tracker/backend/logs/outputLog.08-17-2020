@@ -1,0 +1,9 @@
+${timestamp} ${level}: ${message}
+${timestamp} ${level}: ${message}
+${timestamp} ${level}: ${message}
+${timestamp} ${level}: ${message}
+${timestamp} ${level}: ${message}
+undefined info: ST
+undefined info: ST
+undefined warn: test
+undefined error: testws

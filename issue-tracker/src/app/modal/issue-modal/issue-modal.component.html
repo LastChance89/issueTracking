@@ -15,7 +15,7 @@
                         </h4>
                     </div>
                     <div class="move-left">
-                        <select [(ngModel)]="card.type">
+                        <select [disabled]=disable [(ngModel)]="card.type">
                             <option *ngFor="let type of cardTypes">
                                 {{type}}
                             </option>
@@ -71,13 +71,13 @@
             <th>
 
                 <div >
-                    <div id="project_name" class="move-left">
+                    <div id="project_name"  class="move-left">
                         <h4>
                             Project
                         </h4>
                     </div>
                     <div>
-                        <input placeholder="Project name">
+                        <input [(ngModel)]="card.project" placeholder="Project name">
                     </div>
                 </div>
             </th>
@@ -95,7 +95,7 @@
            
 
         </tr>
-       
+       <!-- 
         <tr *ngIf ="card.type =='Defect'">
             <th>
                 <h4>Reported by</h4>
@@ -109,7 +109,7 @@
                 </select>
             </th>
         </tr>
-
+    -->
 
 
 
@@ -125,6 +125,7 @@
 </div>
 
 <div class="modal-footer">
-    <button (click)="create($event)">Create</button>
+    <button *ngIf="!update"(click)="create($event)">Create</button>
+    <button *ngIf="update" (click)="updateCard($event)">Update</button>
     <button (click)="close($event)">Close</button>
 </div>

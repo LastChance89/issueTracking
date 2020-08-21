@@ -6,6 +6,9 @@ let messageObj = require('../models/messages')
 let result = require('../models/result');
 const Result = require('../models/result');
 const { json } = require('body-parser');
+const Logger = require('../util/logging/loggerUtil');
+
+const logger = new Logger();
 
 
 /*
@@ -16,7 +19,6 @@ module.exports.newIssueRequest = (req, res) =>{
     //Get current time in milliseconds. 
    let idTime =  Date.now();
    let newRequest =new Card(req.body['card']);
-   
    switch(newRequest.type){
        case 'Enhancement' :
             newRequest._id = 'E' + idTime;
@@ -36,10 +38,12 @@ module.exports.newIssueRequest = (req, res) =>{
     Card.create(newRequest,(error, data)=>{
         if(error){
             let result = new Result(messageObj.messages.node,true);
+            logger.error(error);
             res.json(result);
         }
         else{
             let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS,false);
+            logger.info(newRequest._id + " Successfully Created");
             res.json(result);
         }
     })
@@ -58,8 +62,7 @@ module.exports.findAllIssues = (req, res)=>{
     Card.find((error,data)=>{
         //@TODO: need to fix the error. 
         if(error){
-            console.log("error")
-            console.log(error);
+            logger.error(error);
         }
         else{
             //Move these options to metadata?
@@ -88,16 +91,15 @@ module.exports.findAllIssues = (req, res)=>{
 }
 
 
-module.exports.updateIssueRequest = (req,res) =>{
+module.exports.updateIssueRequestStatus = (req,res) =>{
     Card.updateOne( {_id:req.body['id']}, {status:req.body['status']}, (error, result) =>{
         if(error){
-            //need to change console to a log file. 
-            console.log("error" )
-            console.log(error);
+            logger.error(error);
             let result = new Result(messageObj.messages.CREATE_REQUEST_FAIL,true);
             res.json(result);
         }
         else{
+            logger.info("Successfully updated: " + req.body['id']);
             let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS,false);
             res.json(result);
         }
@@ -111,8 +113,30 @@ module.exports.deleteIssue = (req,res) =>{
             console.log("BANG", error);
         }
         else{
+            logger.info("Successfully deleted: " + id);
             let result = new Result(messageObj.messages.DELETE_REQUEST_SUCCESS + id, false);
             res.json(result);
         }
     })
+}
+
+module.exports.updateRequest = (req,res)=>{
+    let card = req.body['card'];
+    Card.updateOne({_id:card._id},{
+        priority: card.priority,
+        assignedUser: card.assignedUser,
+        status: card.status,
+        title: card.title,
+        project: card.project,
+        summary: card.summary},
+        (error,result)=>{
+            if(error){
+                logger.log(error);
+            }
+            else{
+                logger.info("Successfully updated: " + card._id);
+                let resulta = new Result('update complete', false);
+                res.json(resulta);
+            }
+    }) 
 }

@@ -119,7 +119,7 @@ export class HomeComponent implements OnInit {
           break;
       }
 
-      this.cardService.updateCard(cardID, cardStatus).subscribe(result => {
+      this.cardService.updateCardStatus(cardID, cardStatus).subscribe(result => {
         //Update the height after we move the card across status's.
         this.setHeight();
       });
