@@ -1,5 +1,3 @@
-
-
 var express = require('express');
 let Card = require('../models/card');
 let messageObj = require('../models/messages')
@@ -7,6 +5,9 @@ let result = require('../models/result');
 const Result = require('../models/result');
 const { json } = require('body-parser');
 const Logger = require('../util/logging/loggerUtil');
+const NodeCache = require('node-cache');
+let cache = new NodeCache();
+
 
 const logger = new Logger();
 
@@ -16,6 +17,7 @@ const logger = new Logger();
 */
 
 module.exports.newIssueRequest = (req, res) =>{
+   console.log(cache.get("projectMeta"));
     //Get current time in milliseconds. 
    let idTime =  Date.now();
    let newRequest =new Card(req.body['card']);
@@ -50,15 +52,19 @@ module.exports.newIssueRequest = (req, res) =>{
 };
 
 module.exports.findAllIssues = (req, res)=>{
+
+
+    let statusList={};
     let newCard = [];
     let inProgress= [];
     let testing =[];
     let approval =[];
     let completed=[];
 
-    let statusList = {'new':newCard, 'inProgress': inProgress,
-    'testing':testing, "approval": approval,'completed': completed } 
-
+    /*
+    let statusList = {'new':[newCard], 'inProgress': inProgress,
+    'testing':testing,"approval": approval,'completed': completed } 
+ */
     Card.find((error,data)=>{
         //@TODO: need to fix the error. 
         if(error){
