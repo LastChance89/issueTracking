@@ -9,13 +9,16 @@
   
   .boundry {
     width: 250px;
-    border: solid 1px #ccc;
+    border-right: solid 1px black;
+    border-left: solid 1px black;
     display: block;
-    background-color: rgb(232, 232, 232);
+    /*background-color: rgb(195 195 195);
     border-radius: 4px;
-    float: left;
-    margin-right: 85px;
     height: fit-content;
+    */
+    float: left;
+    margin-right: 25px;
+   
     min-height: 800px;
     padding-bottom: 50px;
     overflow: inherit;

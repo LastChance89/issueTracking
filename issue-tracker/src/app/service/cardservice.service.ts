@@ -24,7 +24,6 @@ export class CardService {
     return this.http.post<any>(this.url+'/getAllCards','')
   }
 
-  //Need to change my name to updatecardStats, this hsould be only used for moving across status's. 
   updateCardStatus(requestId, requestStatus){
     let payload = {'id':requestId,'status':requestStatus};
     return this.http.post(this.url+'/updateIssueRequestStatus',payload);

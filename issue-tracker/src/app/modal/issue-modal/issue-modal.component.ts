@@ -54,8 +54,6 @@ export class IssueModalComponent implements OnInit {
   }
   updateCard(){
     this.cardService.updateCard(this.card).subscribe(result=>{
-      console.log("BANG BABVY!");
-      console.log(result);
     })
   }
 }

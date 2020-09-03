@@ -29,11 +29,12 @@ export class HomeComponent implements OnInit {
 
   private currCard : Card;
   private colHeight: number = 800; //default height
-
+  private defHeight = 0;
 
 
 
   ngOnInit() {
+    this.defHeight =document.getElementById("container").scrollHeight -50;
     this.setupCards();
   }
 
@@ -86,10 +87,12 @@ export class HomeComponent implements OnInit {
       if (array.length > longest) {
         longest = array.length;
       }
-    }
-    this.colHeight = longest * 108;
+    } 
+    let useHeight = longest *108;
+    if(this.defHeight)
+    this.colHeight = this.defHeight > useHeight ? this.defHeight : useHeight;
   }
-
+  
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(this.cardList, event.previousIndex, event.currentIndex);

@@ -1,4 +1,4 @@
-<div class="container" (contextmenu)="openSubMenu($event,$event)" cdkDropListGroup>
+<div id = "container" class="container" (contextmenu)="openSubMenu($event,$event)" cdkDropListGroup>
 
   <div id="new" class="boundry"   [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="new">
     <div class="boundry-header">
