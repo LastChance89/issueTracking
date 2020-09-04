@@ -5,8 +5,7 @@ let result = require('../models/result');
 const Result = require('../models/result');
 const { json } = require('body-parser');
 const Logger = require('../util/logging/loggerUtil');
-const NodeCache = require('node-cache');
-let cache = new NodeCache();
+const cache = require('../util/cacheUtility');
 
 
 const logger = new Logger();
@@ -52,7 +51,7 @@ module.exports.newIssueRequest = (req, res) =>{
 };
 
 module.exports.findAllIssues = (req, res)=>{
-
+    console.log(cache.getCachedObject("projectMeta"));
 
     let statusList={};
     let newCard = [];

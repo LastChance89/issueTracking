@@ -1,11 +1,9 @@
 var express = require('express');
 const Project = require('./models/project');
-const NodeCache = require('node-cache');
-let cache = new NodeCache();
+const cache = require('./util/cacheUtility')
 
 module.exports.initalize = function(){
     let projectMeta = {};
-    //{Project = {Position: columnName}};
     Project.find((error, data) =>{
        
         if(error){
@@ -21,7 +19,7 @@ module.exports.initalize = function(){
                 meta['columns'] = columns;
                 projectMeta[element.projectTitle] = meta;
             })
-            cache.set("projectMeta", projectMeta);
+            cache.setCacheObject("projectMeta", projectMeta);
         }
     });
     
