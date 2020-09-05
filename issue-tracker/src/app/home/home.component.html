@@ -1,16 +1,13 @@
 <div id = "container" class="container" (contextmenu)="openSubMenu($event,$event)" cdkDropListGroup>
 
-
-<!--ID is busted, which means it cannot move across columns..... soooooo FIX ME KEVIN-->
-<div *ngFor= "let column of projectColumns" class="boundry"  id = "{{column.name}}"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.iq">
-  <div class="boundry-header">
-    {{column.name}}
+  <div *ngFor= "let column of projectColumns" class="boundry"  id = "{{column.name}}"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.iq">
+    <div class="boundry-header">
+      {{column.name}}
+    </div>
+    <app-card  class="card" *ngFor="let card of column.iq;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
   </div>
-  <app-card  class="card" *ngFor="let card of column.iq;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
-</div>
-
-<app-sub-menu>
-</app-sub-menu>
-
-</div>
-
+  
+  <app-sub-menu>
+  </app-sub-menu>
+  
+  </div>
