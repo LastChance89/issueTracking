@@ -1,44 +1,13 @@
 <div id = "container" class="container" (contextmenu)="openSubMenu($event,$event)" cdkDropListGroup>
 
-  <div id="new" class="boundry"   [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="new">
-    <div class="boundry-header">
-      <p>New</p>
-    </div>
-    <app-card  class="card" *ngFor="let card of new;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
+
+<!--ID is busted, which means it cannot move across columns..... soooooo FIX ME KEVIN-->
+<div *ngFor= "let column of projectColumns" class="boundry"  id = "{{column.name}}"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.iq">
+  <div class="boundry-header">
+    {{column.name}}
   </div>
-
-  <div id="inp" class="boundry" [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="inProgress">
-    <div class="boundry-header">
-      <p>In Progress</p>
-    </div>
-    <app-card class="card" *ngFor="let card of inProgress;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
-
-  </div>
-
-  <div id="test" class="boundry"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="testing">
-    <div class="boundry-header">
-      <p>Testing</p>
-    </div>
-    <app-card class="card" *ngFor="let card of testing;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
-
-  </div>
-
-  <div id="aprov" class="boundry"   [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="approval">
-    <div class="boundry-header">
-      <p>Approval</p>
-    </div>
-    <app-card class="card" *ngFor="let card of approval;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
-
-  </div>
-
-  <div id="complete" class="boundry"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="completed">
-    <div class="boundry-header">
-      <p>Completed</p>
-    </div>
-    <app-card class="card" *ngFor="let card of completed;" [(card)]="card" (contextmenu)="setCurrentCard(card)"cdkDrag></app-card>
-
-  </div>
-
+  <app-card  class="card" *ngFor="let card of column.iq;" [(card)]="card" (contextmenu)="setCurrentCard(card)" cdkDrag></app-card>
+</div>
 
 <app-sub-menu>
 </app-sub-menu>

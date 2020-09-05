@@ -15,13 +15,13 @@ const logger = new Logger();
 @TODO: Move alot of this logic into a service. 
 */
 
-module.exports.newIssueRequest = (req, res) =>{
-   console.log(cache.get("projectMeta"));
+module.exports.newIssueRequest = (req, res) => {
+
     //Get current time in milliseconds. 
-   let idTime =  Date.now();
-   let newRequest =new Card(req.body['card']);
-   switch(newRequest.type){
-       case 'Enhancement' :
+    let idTime = Date.now();
+    let newRequest = new Card(req.body['card']);
+    switch (newRequest.type) {
+        case 'Enhancement':
             newRequest._id = 'E' + idTime;
             break;
         case 'Defect':
@@ -34,90 +34,87 @@ module.exports.newIssueRequest = (req, res) =>{
         default:
             newRequest._id = 'N' + idTime;
             break;
-   }
- 
-    Card.create(newRequest,(error, data)=>{
-        if(error){
-            let result = new Result(messageObj.messages.node,true);
+    }
+
+    Card.create(newRequest, (error, data) => {
+        if (error) {
+            let result = new Result(messageObj.messages.node, true);
             logger.error(error);
             res.json(result);
         }
-        else{
-            let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS,false);
+        else {
+            let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS, false);
             logger.info(newRequest._id + " Successfully Created");
             res.json(result);
         }
     })
 };
 
-module.exports.findAllIssues = (req, res)=>{
-    console.log(cache.getCachedObject("projectMeta"));
-
-    let statusList={};
-    let newCard = [];
-    let inProgress= [];
-    let testing =[];
-    let approval =[];
-    let completed=[];
-
+module.exports.findAllIssues = (req, res) => {
+    //We will make this dynamic in future. 
+    let selectedProject = cache.getCachedObject("projectMeta")["Test"];
     /*
-    let statusList = {'new':[newCard], 'inProgress': inProgress,
-    'testing':testing,"approval": approval,'completed': completed } 
+    x[0].iq.push("TEST");
+    console.log("Hey " + x);
+     x.forEach(element =>{
+         console.log(element);
+     })
  */
-    Card.find((error,data)=>{
+
+    Card.find((error, data) => {
         //@TODO: need to fix the error. 
-        if(error){
+        if (error) {
             logger.error(error);
         }
-        else{
+        else {
             //Move these options to metadata?
-            data.forEach(element=>{
-                switch(element.status){    
+            data.forEach(element => {
+                switch (element.status) {
                     case 1:
-                      inProgress.push(element);
-                      break;
+                        selectedProject[1].iq.push(element);
+                        break;
                     case 2:
-                      testing.push(element);
-                      break;
+                        selectedProject[2].iq.push(element);
+                        break;
                     case 3:
-                      approval.push(element);
-                      break;
+                        selectedProject[3].iq.push(element);
+                        break;
                     case 4:
-                      completed.push(element);
-                      break;
-                    default: 
-                      newCard.push(element);
-                      break;
-                  }
+                        selectedProject[4].iq.push(element);
+                        break;
+                    default:
+                        selectedProject[0].iq.push(element);
+                        break;
+                }
             })
-            res.json(statusList);
+            res.json(selectedProject);
         }
     })
 }
 
 
-module.exports.updateIssueRequestStatus = (req,res) =>{
-    Card.updateOne( {_id:req.body['id']}, {status:req.body['status']}, (error, result) =>{
-        if(error){
+module.exports.updateIssueRequestStatus = (req, res) => {
+    Card.updateOne({ _id: req.body['id'] }, { status: req.body['status'] }, (error, result) => {
+        if (error) {
             logger.error(error);
-            let result = new Result(messageObj.messages.CREATE_REQUEST_FAIL,true);
+            let result = new Result(messageObj.messages.CREATE_REQUEST_FAIL, true);
             res.json(result);
         }
-        else{
+        else {
             logger.info("Successfully updated: " + req.body['id']);
-            let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS,false);
+            let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS, false);
             res.json(result);
         }
     })
 }
 
-module.exports.deleteIssue = (req,res) =>{
+module.exports.deleteIssue = (req, res) => {
     let id = req.body['id'];
-    Card.deleteOne({_id: id}, (error, result)=>{
-        if(error){
+    Card.deleteOne({ _id: id }, (error, result) => {
+        if (error) {
             console.log("BANG", error);
         }
-        else{
+        else {
             logger.info("Successfully deleted: " + id);
             let result = new Result(messageObj.messages.DELETE_REQUEST_SUCCESS + id, false);
             res.json(result);
@@ -125,23 +122,24 @@ module.exports.deleteIssue = (req,res) =>{
     })
 }
 
-module.exports.updateRequest = (req,res)=>{
+module.exports.updateRequest = (req, res) => {
     let card = req.body['card'];
-    Card.updateOne({_id:card._id},{
+    Card.updateOne({ _id: card._id }, {
         priority: card.priority,
         assignedUser: card.assignedUser,
         status: card.status,
         title: card.title,
         project: card.project,
-        summary: card.summary},
-        (error,result)=>{
-            if(error){
+        summary: card.summary
+    },
+        (error, result) => {
+            if (error) {
                 logger.log(error);
             }
-            else{
+            else {
                 logger.info("Successfully updated: " + card._id);
                 let resulta = new Result('update complete', false);
                 res.json(resulta);
             }
-    }) 
+        })
 }

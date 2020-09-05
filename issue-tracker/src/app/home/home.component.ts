@@ -5,6 +5,7 @@ import { CardService } from '../service/cardservice.service';
 import { SubMenuComponent } from '../modal/sub-menu/sub-menu.component';
 import { ModalService } from '../service/modal.service';
 import { RefreshServiceUtil } from '../service/refresh-service-util';
+import { Column } from '../model/column';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,21 @@ export class HomeComponent implements OnInit {
    }
 
   @ViewChild(SubMenuComponent, { static: true }) subMenuComponent: SubMenuComponent;
+ 
+  //Project Columns
+  private projectColumns: Column[];
+ 
+  // Remove these. 
   private new: Card[] = [];
   private inProgress: Card[] = [];
   private testing: Card[] = [];
   private approval: Card[] = [];
   private completed: Card[] = [];
+
+
+
+
+  //keep.
   private cardList = []
 
   private currCard : Card;
@@ -40,11 +51,7 @@ export class HomeComponent implements OnInit {
 
   setupCards() {
     this.cardService.getAllCards().subscribe(result => {
-      this.new = result['new'];
-      this.inProgress = result['inProgress'];
-      this.testing = result['testing'];
-      this.approval = result['approval'];
-      this.completed = result['completed'];
+      this.projectColumns = result;
       this.setHeight();
     },
     error => {
@@ -83,9 +90,9 @@ export class HomeComponent implements OnInit {
     let longest = 0;
     let masterArray = [this.new, this.inProgress, this.testing, this.approval, this.completed];
     //First check what the longest 
-    for (let array of masterArray) {
-      if (array.length > longest) {
-        longest = array.length;
+    for (let array of this.projectColumns) {
+      if (array.iq.length > longest) {
+        longest = array.iq.length;
       }
     } 
     let useHeight = longest *108;
@@ -103,25 +110,12 @@ export class HomeComponent implements OnInit {
 
       let cardID = event.container.data[event.currentIndex]['_id'];
       let cardStatus: number;
-
-      switch (event.container.element.nativeElement.id) {
-        case "inp":
-          cardStatus = 1;
-          break;
-        case "test":
-          cardStatus = 2;
-          break;
-        case "aprov":
-          cardStatus = 3;
-          break;
-        case "complete":
-          cardStatus = 4;
-          break;
-        default: //new status is default. 
-          cardStatus = 0;
-          break;
+      
+      for(let column of this.projectColumns){
+        if(column.name == event.container.element.nativeElement.id){
+          cardStatus = column.position;
+          }
       }
-
       this.cardService.updateCardStatus(cardID, cardStatus).subscribe(result => {
         //Update the height after we move the card across status's.
         this.setHeight();
