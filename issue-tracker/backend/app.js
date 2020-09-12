@@ -3,7 +3,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 const mongoose = require('mongoose');
 const Logger = require('./util/logging/loggerUtil');
-const initalizer = require('./initalize');
+const initalizer = require('./services/initalize-service');
 
 path = require('path'),
 publicDir = path.join(__dirname,'public');

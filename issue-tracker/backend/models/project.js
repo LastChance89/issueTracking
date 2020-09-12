@@ -2,6 +2,7 @@ const mongoose = require('mongoose')
 const Column = require('./column')
 let Project = mongoose.Schema({
     projectTitle: String,
+    position: Number,
     columns: []
 
 }, {collection: "Project_Meta"});

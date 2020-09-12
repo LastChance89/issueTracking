@@ -6,88 +6,33 @@ const Result = require('../models/result');
 const { json } = require('body-parser');
 const Logger = require('../util/logging/loggerUtil');
 const cache = require('../util/cacheUtility');
-
+const projectService = require('../services/project-service');
 
 const logger = new Logger();
 
-
-/*
-@TODO: Move alot of this logic into a service. 
-*/
-
-module.exports.newIssueRequest = (req, res) => {
-
-    //Get current time in milliseconds. 
-    let idTime = Date.now();
-    let newRequest = new Card(req.body['card']);
-    switch (newRequest.type) {
-        case 'Enhancement':
-            newRequest._id = 'E' + idTime;
-            break;
-        case 'Defect':
-            newRequest._id = 'D' + idTime;
-            break;
-        case 'Generic Request':
-            newRequest._id = 'G' + idTime;
-            break;
-        //default is New Functionality
-        default:
-            newRequest._id = 'N' + idTime;
-            break;
-    }
+module.exports.newIrq = (req, res) => {
+    newRequest = projectService.generateIqrID(new Card(req.body['card']));
 
     Card.create(newRequest, (error, data) => {
         if (error) {
-            let result = new Result(messageObj.messages.node, true);
             logger.error(error);
-            res.json(result);
+            res.json(new Result(messageObj.messages.node, true));
         }
         else {
-            let result = new Result(messageObj.messages.CREATE_REQUEST_SUCCESS, false);
             logger.info(newRequest._id + " Successfully Created");
-            res.json(result);
+            res.json(new Result(messageObj.messages.CREATE_REQUEST_SUCCESS, false));
         }
     })
 };
 
-module.exports.findAllIssues = (req, res) => {
-    //We will make this dynamic in future. 
-    let selectedProject = cache.getCachedObject("projectMeta")["Test"];
-    /*
-    x[0].iq.push("TEST");
-    console.log("Hey " + x);
-     x.forEach(element =>{
-         console.log(element);
-     })
- */
-
+module.exports.getAllIrq = (req, res) => {
     Card.find((error, data) => {
         //@TODO: need to fix the error. 
         if (error) {
             logger.error(error);
         }
         else {
-            //Move these options to metadata?
-            data.forEach(element => {
-                switch (element.status) {
-                    case 1:
-                        selectedProject[1].iq.push(element);
-                        break;
-                    case 2:
-                        selectedProject[2].iq.push(element);
-                        break;
-                    case 3:
-                        selectedProject[3].iq.push(element);
-                        break;
-                    case 4:
-                        selectedProject[4].iq.push(element);
-                        break;
-                    default:
-                        selectedProject[0].iq.push(element);
-                        break;
-                }
-            })
-            res.json(selectedProject);
+            res.json(projectService.setupAllIrqData(data));
         }
     })
 }
@@ -112,12 +57,11 @@ module.exports.deleteIssue = (req, res) => {
     let id = req.body['id'];
     Card.deleteOne({ _id: id }, (error, result) => {
         if (error) {
-            console.log("BANG", error);
+            console.log("ERROR", error);
         }
         else {
             logger.info("Successfully deleted: " + id);
-            let result = new Result(messageObj.messages.DELETE_REQUEST_SUCCESS + id, false);
-            res.json(result);
+            res.json(new Result(messageObj.messages.DELETE_REQUEST_SUCCESS + id, false));
         }
     })
 }
@@ -138,8 +82,7 @@ module.exports.updateRequest = (req, res) => {
             }
             else {
                 logger.info("Successfully updated: " + card._id);
-                let resulta = new Result('update complete', false);
-                res.json(resulta);
+                res.json( new Result('update complete', false));
             }
         })
 }

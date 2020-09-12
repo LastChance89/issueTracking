@@ -18,8 +18,8 @@ let corsOptions = {
 routing.use(cors(corsOptions)) 
 routing.use(express.json());
 
-routing.route('/newCard').post(issueRequestController.newIssueRequest);
-routing.route('/getAllCards').post(issueRequestController.findAllIssues);
+routing.route('/newCard').post(issueRequestController.newIrq);
+routing.route('/getAllCards').post(issueRequestController.getAllIrq);
 routing.route('/updateIssueRequestStatus').post(issueRequestController.updateIssueRequestStatus);
 routing.route('/deleteIssue').post(issueRequestController.deleteIssue);
 routing.route('/updateIssueRequest').post(issueRequestController.updateRequest);

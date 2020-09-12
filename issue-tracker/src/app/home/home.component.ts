@@ -22,27 +22,14 @@ export class HomeComponent implements OnInit {
 
   @ViewChild(SubMenuComponent, { static: true }) subMenuComponent: SubMenuComponent;
  
-  //Project Columns
+  //Project Columns used for front end rendering and project card distrabution. 
   private projectColumns: Column[];
- 
-  // Remove these. 
-  private new: Card[] = [];
-  private inProgress: Card[] = [];
-  private testing: Card[] = [];
-  private approval: Card[] = [];
-  private completed: Card[] = [];
-
-
-
-
-  //keep.
+  //keep but need to figure out why. 
   private cardList = []
 
   private currCard : Card;
   private colHeight: number = 800; //default height
   private defHeight = 0;
-
-
 
   ngOnInit() {
     this.defHeight =document.getElementById("container").scrollHeight -50;
@@ -88,7 +75,6 @@ export class HomeComponent implements OnInit {
 
   setHeight() {
     let longest = 0;
-    let masterArray = [this.new, this.inProgress, this.testing, this.approval, this.completed];
     //First check what the longest 
     for (let array of this.projectColumns) {
       if (array.iq.length > longest) {
@@ -96,7 +82,6 @@ export class HomeComponent implements OnInit {
       }
     } 
     let useHeight = longest *108;
-    if(this.defHeight)
     this.colHeight = this.defHeight > useHeight ? this.defHeight : useHeight;
   }
   
