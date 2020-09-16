@@ -1,7 +1,6 @@
 var express = require('express');
 let Card = require('../models/card');
 let messageObj = require('../models/messages')
-let result = require('../models/result');
 const Result = require('../models/result');
 const { json } = require('body-parser');
 const Logger = require('../util/logging/loggerUtil');
