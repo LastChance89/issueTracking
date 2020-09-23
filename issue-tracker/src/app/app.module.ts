@@ -21,6 +21,7 @@ import { MatNativeDateModule, MatMenuTrigger } from '@angular/material';
 import { SubMenuComponent } from './modal/sub-menu/sub-menu.component';
 import { CloseSubMenuUtil } from './util/close-submenu-util.directive'
 import {RefreshServiceUtil} from './service/refresh-service-util';
+import { NewIqrComponent } from './iqr/new-iqr/new-iqr.component';
 
 
 @NgModule({
@@ -35,7 +36,8 @@ import {RefreshServiceUtil} from './service/refresh-service-util';
     IssueModalComponent,
     MessageModalComponent,
     SubMenuComponent,
-    CloseSubMenuUtil
+    CloseSubMenuUtil,
+    NewIqrComponent
   ],
   imports: [
     BrowserModule,

@@ -6,6 +6,7 @@ import { SubMenuComponent } from '../modal/sub-menu/sub-menu.component';
 import { ModalService } from '../service/modal.service';
 import { RefreshServiceUtil } from '../service/refresh-service-util';
 import { Column } from '../model/column';
+import { Project } from '../model/project';
 
 @Component({
   selector: 'app-home',
@@ -14,22 +15,23 @@ import { Column } from '../model/column';
 })
 export class HomeComponent implements OnInit {
 
-  constructor(private cardService: CardService, private modalService: ModalService, private refreshService: RefreshServiceUtil) {
-    this.refreshService.changeEmitted$.subscribe(result=>{
-      this.setupCards();
-    })
-   }
-
   @ViewChild(SubMenuComponent, { static: true }) subMenuComponent: SubMenuComponent;
  
   //Project Columns used for front end rendering and project card distrabution. 
-  private projectColumns: Column[];
+  private project: Project;
   //keep but need to figure out why. 
   private cardList = []
 
   private currCard : Card;
   private colHeight: number = 800; //default height
   private defHeight = 0;
+
+  constructor(private cardService: CardService, private modalService: ModalService, private refreshService: RefreshServiceUtil) {
+    this.refreshService.changeEmitted$.subscribe(result=>{
+      this.setupCards();
+    })
+   }
+
 
   ngOnInit() {
     this.defHeight =document.getElementById("container").scrollHeight -50;
@@ -38,7 +40,7 @@ export class HomeComponent implements OnInit {
 
   setupCards() {
     this.cardService.getAllCards().subscribe(result => {
-      this.projectColumns = result;
+      this.project = result;
       this.setHeight();
     },
     error => {
@@ -76,7 +78,7 @@ export class HomeComponent implements OnInit {
   setHeight() {
     let longest = 0;
     //First check what the longest 
-    for (let array of this.projectColumns) {
+    for (let array of this.project.columns) {
       if (array.iq.length > longest) {
         longest = array.iq.length;
       }
@@ -96,7 +98,7 @@ export class HomeComponent implements OnInit {
       let cardID = event.container.data[event.currentIndex]['_id'];
       let cardStatus: number;
       
-      for(let column of this.projectColumns){
+      for(let column of this.project.columns){
         if(column.name == event.container.element.nativeElement.id){
           cardStatus = column.position;
           }

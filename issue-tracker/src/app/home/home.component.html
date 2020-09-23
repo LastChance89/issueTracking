@@ -1,6 +1,6 @@
 <div id = "container" class="container" (contextmenu)="openSubMenu($event,$event)" cdkDropListGroup>
 
-  <div *ngFor= "let column of projectColumns" class="boundry"  id = "{{column.name}}"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.iq">
+  <div *ngFor= "let column of project?.columns" class="boundry"  id = "{{column.name}}"  [style.height.px] = "colHeight" cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="column.iq">
     <div class="boundry-header">
       {{column.name}}
     </div>

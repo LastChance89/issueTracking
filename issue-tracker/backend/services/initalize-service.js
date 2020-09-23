@@ -4,7 +4,7 @@ const cache = require('../util/cacheUtility')
 
 
 module.exports.initalize = function(){
-    let projectMeta = {};
+
 
     Project.find((error, data) =>{
         if(error){
@@ -12,12 +12,11 @@ module.exports.initalize = function(){
         }
         else{
           //  console.log(data);
+            let projects = []
             data.forEach(element=>{
-
-                projectMeta[element.projectTitle] = element.columns;
-                //console.log(projectMeta);
+                projects.push(new Project(element));
             })
-            cache.setCacheObject("projectMeta", projectMeta);
+            cache.setCacheObject("projects", projects);
      }
     });
    

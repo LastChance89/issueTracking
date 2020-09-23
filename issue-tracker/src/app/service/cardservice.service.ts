@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Card } from '../model/card';
 import { Observable } from 'rxjs';
 import { Result } from '../model/result';
-import { Column } from '../model/column';
+import { Project } from '../model/project';
 
 
 
@@ -21,8 +21,8 @@ export class CardService {
     return this.http.post<Result>(this.url+'/newCard',payload);
   }
 
-  getAllCards(): Observable<Column[]>{
-    return this.http.post<Column[]>(this.url+'/getAllCards','')
+  getAllCards(): Observable<Project>{
+    return this.http.post<Project>(this.url+'/getAllCards','')
   }
 
   updateCardStatus(requestId, requestStatus){

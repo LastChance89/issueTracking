@@ -4,11 +4,9 @@ const cache = require('../util/cacheUtility');
 
 module.exports.setupAllIrqData = function (data) {
     //Make Me Dynamic. Test will be replaced by the project name of the board. 
-    let selectedProject = cache.getCachedObject("projectMeta")["Test"];
-
-
+    let selectedProject = cache.getCachedObject("projects")[0];
     data.forEach(element => {
-        for(let column of selectedProject){
+        for(let column of selectedProject.columns){
             /*
             Break out of loop because once we know the status is equal to the column position, 
             we have no need to check the additional columns.   

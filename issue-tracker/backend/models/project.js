@@ -1,10 +1,11 @@
 const mongoose = require('mongoose')
 const Column = require('./column')
-let Project = mongoose.Schema({
+let Project = new mongoose.Schema({
     projectTitle: String,
     position: Number,
-    columns: []
-
+    columns: [],
+    iqrTypes:[],
+    priorities:[]
 }, {collection: "Project_Meta"});
 
 module.exports = mongoose.model('Project', Project);
