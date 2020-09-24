@@ -5,7 +5,6 @@ import { CardService } from '../service/cardservice.service';
 import { SubMenuComponent } from '../modal/sub-menu/sub-menu.component';
 import { ModalService } from '../service/modal.service';
 import { RefreshServiceUtil } from '../service/refresh-service-util';
-import { Column } from '../model/column';
 import { Project } from '../model/project';
 
 @Component({
@@ -56,8 +55,7 @@ export class HomeComponent implements OnInit {
   menu's poping up. This way, right click on the card, and then the second call endsup calling 
   the actual open menu method, openSubMenu 
   */
-  setCurrentCard( card ) {
-    event.preventDefault();
+  setCurrentCard(card) {
     this.currCard = card;
     
   }
@@ -71,7 +69,7 @@ export class HomeComponent implements OnInit {
   openSubMenu({ x, y }: MouseEvent, event ) {
     event.preventDefault();
 
-    this.subMenuComponent.open({ x, y }, this.currCard);
+    this.subMenuComponent.open({ x, y }, this.project,this.currCard);
     this.currCard = undefined;
   }
 

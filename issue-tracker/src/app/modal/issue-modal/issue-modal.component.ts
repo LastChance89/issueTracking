@@ -3,6 +3,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CardService } from 'src/app/service/cardservice.service';
 import { Card } from 'src/app/model/card';
 import { RefreshServiceUtil } from 'src/app/service/refresh-service-util';
+import { Project } from 'src/app/model/project';
 
 
 
@@ -18,6 +19,7 @@ export class IssueModalComponent implements OnInit {
   private card :Card = new Card();
   private disable: Boolean = false;
   private update: Boolean = true;
+  private project: Project;
 
   //Move these to metadata? load and cache? admin functionality maybe to update on fly. 
   //How customizeable do I feel like making this. 

@@ -5,6 +5,7 @@ import { TemplatePortal } from '@angular/cdk/portal';
 import { CardService } from 'src/app/service/cardservice.service';
 import { ModalService } from 'src/app/service/modal.service';
 import { RefreshServiceUtil } from 'src/app/service/refresh-service-util';
+import { Project } from 'src/app/model/project';
 
 @Component({
   selector: 'app-sub-menu',
@@ -15,6 +16,7 @@ import { RefreshServiceUtil } from 'src/app/service/refresh-service-util';
 export class SubMenuComponent implements OnInit {
 
   private card: Card;
+  private project: Project;
   private overlayRef: OverlayRef;
 
   @ViewChild('subMenu',{static:true}) subMenuComponent: TemplateRef<ElementRef>;
@@ -30,11 +32,11 @@ export class SubMenuComponent implements OnInit {
   
 
   //Card is optional as we might not pass it, but due to changes in the component that calls it maybe remove it alltogeather?
-  open({x,y}, card?) {
+  open({x,y}, project, card?) {
     //Close the last sub menu so we dont have multiple. 
     this.close();
     this.card = card;
-    
+    this.project = project;
     const positionStrategy = this.overlay.position()
       .flexibleConnectedTo({ x, y })
       .withPositions([
@@ -82,12 +84,12 @@ export class SubMenuComponent implements OnInit {
   
   quickCreate(){
     this.close();
-    this.modalService.openIssueModal();
+    this.modalService.openIssueModal(this.project);
   }
 
   quickEdit(){
     this.close();
-    this.modalService.openIssueModal(this.card);
+    this.modalService.openIssueModal(this.project,this.card);
   }
   
 
