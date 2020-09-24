@@ -87,7 +87,7 @@ export class HomeComponent implements OnInit {
   
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
-      moveItemInArray(this.cardList, event.previousIndex, event.currentIndex);
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
     else {
       transferArrayItem(event.previousContainer.data, event.container.data,

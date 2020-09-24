@@ -18,7 +18,6 @@ export class AppComponent {
 
   createNewIssue(e){
     e.preventDefault;
-    this.modalService.openIssueModal();
   }
 
 
