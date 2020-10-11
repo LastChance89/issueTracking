@@ -1,118 +1,35 @@
-<div>
-    <table>
+<div class="container">
+    <table class="create-table">
         <tr>
             <th>
-                <div class="move-left">
-                    <div>
-                        <h4>
-                            Request Type
-                        </h4>
-                    </div>
-                    <div class="move-left">
-                        <select [(ngModel)]="card.type">
-                            <option *ngFor="let type of cardTypes">
-                                {{type}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                <h4>
+                    Request Type
+                </h4>
             </th>
             <th>
-                <div class="move-left">
-                    <h4>
-                        Request Status
-                    </h4>
-                    <div class="move-left">
-                        <select [(ngModel)]="card.status">
-                            <option *ngFor="let status of statusTypes" [ngValue]=status[1]>{{status[0]}}</option>
-                        </select>
-                    </div>
-                </div>
+                Request Status
             </th>
+            <th>
+                Request Priority
+            </th>
+            <th>
+                Assigned User
+            </th>
+
+        </tr>
+        <tr>
+
         </tr>
         <tr>
             <th>
-                <div class="move-left">
-                    <h4>
-                        Request Priority
-                    </h4>
-                    <div class="move-left">
-                        <select [(ngModel)]="card.priority">
-                            <option *ngFor="let priority of priorities" [ngValue]=priority[1]>
-                                {{priority[0]}}
-                            </option>
-                        </select>
-                    </div>
-                </div>
+                Project
             </th>
-            <th>
-                <div class="move-left">
-                    <h4>
-                        Assigned User
-                    </h4>
-                    <div class="move-left">
-                        <!--Need to setup users in database for now no users-->
-                        <select [(ngModel)]="card.assignedUser">
-                            <option>
-                                Not Assigned
-                            </option>
-                        </select>
-                    </div>
-                </div>
+            <th> 
+                Request Title
             </th>
-        </tr>
-        <tr>
-            <th>
-
-                <div >
-                    <div id="project_name" class="move-left">
-                        <h4>
-                            Project
-                        </h4>
-                    </div>
-                    <div>
-                        <input placeholder="Project name">
-                    </div>
-                </div>
-            </th>
-            <th>
-                <div class="move-left">
-                    <h4 class="move-left">
-                        Request Title
-                    </h4>
-                    <div>
-                        <input [(ngModel)]="card.title" id="text" placeholder="title" type="text">
-                    </div>
-                </div>
-            </th>
-
-           
-
-        </tr>
-        
-        <tr *ngIf ="card.type =='Defect'">
-            <th>
-                <h4>Reported by</h4>
-                <select>
-                    <option> 
-                        Internal
-                    </option>
-                    <option> 
-                        External
-                    </option>
-                </select>
+            <th> 
+                Request Sumamry
             </th>
         </tr>
     </table>
-    <h4>
-        Request Sumamry
-    </h4>
-    <div>
-        <textarea class="summary-text-input" [(ngModel)]="card.summary"> </textarea>
-    </div>
-</div>
-
-<div>
-    <button (click)="create($event)">Create</button>
-    <button (click)="close($event)">Close</button>
 </div>

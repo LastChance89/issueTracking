@@ -70,6 +70,7 @@ export class HomeComponent implements OnInit {
     event.preventDefault();
 
     this.subMenuComponent.open({ x, y }, this.project,this.currCard);
+    //resetting the current card here so it does not stay selected if we right click the card. 
     this.currCard = undefined;
   }
 
@@ -107,4 +108,17 @@ export class HomeComponent implements OnInit {
       });
     }
   }
+
+  /*
+  ------------------------------------------------------------------------------------
+  Methods for testing purposes.
+  ------------------------------------------------------------------------------------
+  */ 
+  getProject(){
+    return this.project;
+  }
+  getHeight(){
+    return this.colHeight;
+  }
+
 }

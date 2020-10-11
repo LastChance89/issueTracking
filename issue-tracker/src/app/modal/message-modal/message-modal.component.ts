@@ -12,7 +12,7 @@ export class MessageModalComponent implements OnInit {
 
   constructor(public activeModal: NgbActiveModal) { }
 
-  private result: Result;
+  result: Result;
 
   ngOnInit() {
   }

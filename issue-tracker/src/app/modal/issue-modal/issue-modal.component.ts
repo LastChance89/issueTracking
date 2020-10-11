@@ -21,24 +21,25 @@ export class IssueModalComponent implements OnInit {
   private update: Boolean = true;
   private project: Project;
 
-  //Move these to metadata? load and cache? admin functionality maybe to update on fly. 
-  //How customizeable do I feel like making this. 
-  //Need to look at how I should handle MongoDB setup. 
-  cardTypes: String[] = ["New Functionality","Enhancement","Defect","Generic Request"]
-  priorities = [["Very Low",0], ["Low",1], ["Medium",2],["High",3],["Very High",4]];
-  statusTypes = [["New",0], ["In Progress",1],["Testing",2],["Approval",3],["Completed",4]];
-
   ngOnInit() {
     //Set defualt options if the card is new.
+    this.setupDefault();
+  }
+
+  setupDefault(){
     if(this.card.type == undefined){
       this.card.type = "New Functionality"
       this.card.priority = 0;
       this.card.assignedUser = "Not Assigned"
       this.card.status = 0;
-      this.disable = false;
+      this.disable = false; 
       this.update = false;
     }
+    else{
+      this.disable = true;
+    }
   }
+
   create(e){
     e.preventDefault();
     this.cardService.newCard(this.card).subscribe(result =>{
@@ -56,8 +57,30 @@ export class IssueModalComponent implements OnInit {
   }
   updateCard(){
     this.cardService.updateCard(this.card).subscribe(result=>{
+      this.activeModal.close(result);
     })
   }
+/*
+----------------------------------------------------------------
+Methods for testing purposes. 
+----------------------------------------------------------------
+*/
+  setProject(project){
+    this.project = project;
+  }
+  getProject(){
+    return this.project;
+  }
+  getCard(){
+    return this.card;
+  }
+  isDisabled(){
+    return this.disable;
+  }
+  isUpdate(){
+    return this.update;
+  }
+
 }
 
 /*

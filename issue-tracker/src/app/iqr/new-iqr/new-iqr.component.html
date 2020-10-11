@@ -6,40 +6,47 @@
         </h4>
 
                     <div class="move-left">
+                        <!--
                         <select [disabled]=disable [(ngModel)]="card.type">
                             <option *ngFor="let type of cardTypes">
                                 {{type}}
                             </option>
                         </select>
+                        -->
                     </div>
         <h4>
             Request Status
         </h4>
         <div >
+            <!--
             <select [(ngModel)]="card.status">
                 <option *ngFor="let status of statusTypes" [ngValue]=status[1]>{{status[0]}}</option>
             </select>
+        -->
         </div>
         <h4>
             Request Priority
         </h4>
         <div class="move-left">
+            <!--
             <select [(ngModel)]="card.priority">
                 <option *ngFor="let priority of priorities" [ngValue]=priority[1]>
                     {{priority[0]}}
                 </option>
             </select>
+        -->
         </div>
         <h4>
             Assigned User
         </h4>
         <div class="move-left">
-            <!--Need to setup users in database for now no users-->
+            <!--Need to setup users in database for now no users
             <select [(ngModel)]="card.assignedUser">
                 <option>
                     Not Assigned
                 </option>
             </select>
+            -->
         </div>
         <h4>
             Project

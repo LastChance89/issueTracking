@@ -3,7 +3,7 @@ import { Subject } from 'rxjs';
 import { Card } from './model/card';
 import{CardService} from './service/cardservice.service'
 import { ModalService } from './service/modal.service';
-import { Result } from './model/result';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -11,16 +11,9 @@ import { Result } from './model/result';
 })
 export class AppComponent {
   title = 'frontend';
-  constructor(private cardService: CardService, private modalService: ModalService){}
+  constructor(private cardService: CardService, private modalService: ModalService, private router: Router){}
 
   private newCard = new Subject<Card>(); 
   changedEmmitted$ = this.newCard.asObservable();
-
-  createNewIssue(e){
-    e.preventDefault;
-  }
-
-
-
 
 }
