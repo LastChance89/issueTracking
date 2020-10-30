@@ -18,16 +18,41 @@
 
         </tr>
         <tr>
+            <th>
+                <!--  [(ngModel)]="card.type"-->
+                <select>
+                    <option *ngFor="let type of project?.iqrTypes">
+                        {{type}}
+                    </option>
+                </select>
+            </th>
+            <th> 
+                <!--[(ngModel)]="card.status"-->
+                <select >
+                    <option *ngFor="let column of project?.columns" [ngValue]=name>{{column.name}}</option>
+                </select>
+            </th>
+            <th> 
+                <!--[(ngModel)]="card.priority"-->
+                <select>
+                    <option *ngFor="let priority of project?.priorities" [ngValue]=priority[1]>
+                        {{priority[0]}}
+                    </option>
+                </select>
+            </th>
+        </tr>
+
+        <tr>
 
         </tr>
         <tr>
             <th>
                 Project
             </th>
-            <th> 
+            <th>
                 Request Title
             </th>
-            <th> 
+            <th>
                 Request Sumamry
             </th>
         </tr>

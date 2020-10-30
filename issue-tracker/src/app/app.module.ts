@@ -21,7 +21,7 @@ import { MatNativeDateModule, MatMenuTrigger } from '@angular/material';
 import { SubMenuComponent } from './modal/sub-menu/sub-menu.component';
 import { CloseSubMenuUtil } from './util/close-submenu-util.directive'
 import {RefreshServiceUtil} from './service/refresh-service-util';
-import { NewIqrComponent } from './iqr/new-iqr/new-iqr.component';
+import { ProjectMetaService } from './service/project-meta.service';
 
 
 @NgModule({
@@ -36,8 +36,7 @@ import { NewIqrComponent } from './iqr/new-iqr/new-iqr.component';
     IssueModalComponent,
     MessageModalComponent,
     SubMenuComponent,
-    CloseSubMenuUtil,
-    NewIqrComponent
+    CloseSubMenuUtil
   ],
   imports: [
     BrowserModule,
@@ -54,7 +53,7 @@ import { NewIqrComponent } from './iqr/new-iqr/new-iqr.component';
     DragDropModule
   ],
   entryComponents:[IssueModalComponent,MessageModalComponent],
-  providers: [CardService,RefreshServiceUtil],
+  providers: [CardService,RefreshServiceUtil,ProjectMetaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
